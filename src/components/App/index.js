@@ -5,124 +5,123 @@ import Cavalo from '../Cavalo';
 import Bispo from '../Bispo';
 import Rainha from '../Rainha';
 import Rei from '../Rei';
-
+import Peao from '../Peao';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
+      colunaImpar: "container-chess-white",
+      colunaPar: "container-chess-black"
     }
   }
 
   render() {
+    
+    const { colunaImpar, colunaPar } = this.state;
+
     return (
       <div> xadrez da ovelha estoica :)
         <div className="container">
 
-
           {/* coluna A */}
-          <div>
-            A
-            <Torre />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+          <div className={colunaImpar}>
+            <Torre cor="preta" />
+            <Torre cor="branca" />
+            
+            <Peao/>
+            {/* <div></div> */}
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
 
           {/* coluna B */}
-          <div>
-            B
+          <div className={colunaPar}>
             <Cavalo />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
 
           {/* coluna C */}
-          <div>
-            C
+          <div className={colunaImpar}>
             <Bispo />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
 
           {/* coluna D */}
-          <div>
-            D
+          <div  className={colunaPar}>
             <Rainha />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
 
           {/* coluna E */}
-          <div>
-            E
+          <div className={colunaImpar}>
             <Rei />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
 
 
           {/* coluna F */}
-          <div>
-            F
+          <div className={colunaPar}>
             <Bispo />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div></div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div></div>
 
           {/* coluna G */}
-          <div>
-            G
+          <div className={colunaImpar}>
             <Cavalo />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div></div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <Peao />
+            <Cavalo />
+          </div>
 
 
           {/* coluna H */}
-          <div>
-            H
+          <div  className={colunaPar}>
             <Torre />
-            <div>7</div>
-            <div>6</div>
-            <div>5</div>
-            <div>4</div>
-            <div>3</div>
-            <div>2</div>
-            <div>1</div>
+            <Peao />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <Peao />
+            <Torre />
           </div>
         </div>
 

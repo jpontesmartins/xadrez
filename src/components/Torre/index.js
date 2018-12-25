@@ -1,20 +1,43 @@
 import React, { Component } from 'react';
+import '../App/styles.css';
 
 class Torre extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      cor: ""
     }
+
+  }
+
+  componentDidMount() {
+    console.log('props: ');
+    console.log(this.props);
+    console.log(this.state);
+
+    if (this.props.cor == 'branca') {
+      this.setState({
+        cor: 'branca'
+      })
+    } else {
+      this.setState({
+        cor: 'preta'
+      })
+    }
+
+
   }
 
   render() {
     const torre = "♜";
-    //&#9820;
+    const { cor } = this.state;
+
+    console.log(cor);
     
     return (
       <div>
-        <span>
+        <span className={cor}>
           {torre}
         </span>
       </div>

@@ -1,10 +1,36 @@
-.container {
+.container {  
+  width: min-content;
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+  background-color: lightblue;
+  border: 10px solid;
 }
 
 .container > div {
-  background-color: black;
+  background-color: #555;
   color: white;
   font-size: 40px;
+}
+
+.container-chess-white > div:nth-child(odd) {
+  background-color: #999;
+}
+.container-chess-black > div:nth-child(even) {
+  background-color: #999;
+}
+
+.container > div > div {
+  font-size: 50px;
+  height: 70px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.preta {
+  color: #000;
+}
+
+.branca {
+  color: #fff;
 }
