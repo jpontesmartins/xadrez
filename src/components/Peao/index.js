@@ -8,9 +8,11 @@ class Peao extends Component {
     this.state = {
       cor: ""
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  
+
   componentDidMount() {
     if (this.props.cor == 'branca') {
       this.setState({
@@ -23,12 +25,16 @@ class Peao extends Component {
     }
   }
 
+  handleClick() {
+    console.log('peao');
+  }
+
   render() {
     const peao = "♟";
     const { cor } = this.state;
-    
+
     return (
-      <div className={cor}>
+      <div className={cor} onClick={this.handleClick}>
         <span>
           {peao}
         </span>
@@ -36,5 +42,6 @@ class Peao extends Component {
     );
   }
 }
+
 
 export default Peao;
