@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px
+}
+
+.container > div {
+  background-color: black;
+  color: white;
+  font-size: 40px;
+}
