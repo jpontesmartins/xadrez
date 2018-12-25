@@ -5,14 +5,32 @@ class Rei extends Component {
     super();
 
     this.state = {
+      cor: ""
+    }
+  }
+
+  componentDidMount() {
+    console.log('props: ');
+    console.log(this.props);
+    console.log(this.state);
+
+    if (this.props.cor == 'branca') {
+      this.setState({
+        cor: 'branca'
+      })
+    } else {
+      this.setState({
+        cor: 'preta'
+      })
     }
   }
 
   render() {
     const rei = "♚";
-    
+    const { cor } = this.state;
+
     return (
-      <div>
+      <div className={cor}>
         <span>
           {rei}
         </span>

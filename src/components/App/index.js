@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   render() {
-    
+
     const { colunaImpar, colunaPar } = this.state;
 
     return (
@@ -28,100 +28,99 @@ class App extends Component {
           {/* coluna A */}
           <div className={colunaImpar}>
             <Torre cor="preta" />
+            <Peao cor="preta" />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <Peao cor="branca" />
             <Torre cor="branca" />
-            
-            <Peao/>
-            {/* <div></div> */}
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
           </div>
 
           {/* coluna B */}
           <div className={colunaPar}>
-            <Cavalo />
-            <Peao />
+            <Cavalo cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
-            <div></div>
+            <Peao cor="branca" />
+            <Cavalo cor="branca"/>
           </div>
 
           {/* coluna C */}
           <div className={colunaImpar}>
-            <Bispo />
-            <Peao />
+            <Bispo cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
-            <div></div>
+            <Peao cor="branca"/>
+            <Bispo cor="branca"/>
           </div>
 
           {/* coluna D */}
-          <div  className={colunaPar}>
-            <Rainha />
-            <Peao />
+          <div className={colunaPar}>
+            <Rainha cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
-            <div></div>
+            <Peao cor="branca"/>
+            <Rainha cor="branca"/>
           </div>
 
           {/* coluna E */}
           <div className={colunaImpar}>
-            <Rei />
-            <Peao />
+            <Rei cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
-            <div></div>
+            <Peao cor="branca"/>
+            <Rei cor="branca"/>
           </div>
 
 
           {/* coluna F */}
           <div className={colunaPar}>
-            <Bispo />
-            <Peao />
+            <Bispo cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
-            <div></div></div>
+            <Peao cor="branca"/>
+            <Bispo cor="branca"/>
+          </div>
 
           {/* coluna G */}
           <div className={colunaImpar}>
-            <Cavalo />
-            <Peao />
+            <Cavalo cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <Peao />
-            <Cavalo />
+            <Peao cor="branca"/>
+            <Cavalo cor="branca"/>
           </div>
 
 
           {/* coluna H */}
-          <div  className={colunaPar}>
-            <Torre />
-            <Peao />
+          <div className={colunaPar}>
+            <Torre cor="preta" />
+            <Peao cor="preta" />
             <div></div>
             <div></div>
             <div></div>
             <div></div>
-            <Peao />
-            <Torre />
+            <Peao cor="branca"/>
+            <Torre cor="branca"/>
           </div>
         </div>
 
