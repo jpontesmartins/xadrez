@@ -12,10 +12,6 @@ class Peao extends Component {
 
   
   componentDidMount() {
-    console.log('props: ');
-    console.log(this.props);
-    console.log(this.state);
-
     if (this.props.cor == 'branca') {
       this.setState({
         cor: 'branca'

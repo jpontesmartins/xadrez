@@ -25,10 +25,8 @@ class Torre extends Component {
 
   render() {
     const torre = "♜";
-    const { cor } = this.state;
-
-    console.log(cor);
     
+    const { cor } = this.state;
     return (
       <div>
         <span className={cor}>
