@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App/styles.css';
+import '../Tabuleiro/styles.css';
 
 class Torre extends Component {
   constructor(props) {

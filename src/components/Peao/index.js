@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import '../App/styles.css';
+import '../Tabuleiro/styles.css';
 
 class Peao extends Component {
   constructor() {
     super();
 
     this.state = {
-      cor: ""
+      cor: "",
+      casa: ""
+
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -16,17 +18,20 @@ class Peao extends Component {
   componentDidMount() {
     if (this.props.cor == 'branca') {
       this.setState({
-        cor: 'branca'
+        cor: 'branca',
+        casa: this.props.casa
       })
     } else {
       this.setState({
-        cor: 'preta'
+        cor: 'preta',
+        casa: this.props.casa
       })
     }
   }
 
   handleClick() {
-    console.log('peao');
+    const { cor, casa } = this.state;
+    console.log(`peão da cor ${cor} na casa ${casa}`);
   }
 
   render() {
