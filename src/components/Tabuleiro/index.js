@@ -8,8 +8,8 @@ class Tabuleiro extends Component {
     super();
 
     this.state = {
-      colunaImpar: "container-chess-white",
-      colunaPar: "container-chess-black",
+      impar: "container-chess-white",
+      par: "container-chess-black",
       colunaA: builderColumns.buildColumnA(),
       colunaB: builderColumns.buildColumnB(),
       colunaC: builderColumns.buildColumnC(),
@@ -24,27 +24,27 @@ class Tabuleiro extends Component {
 
 
   render() {
-    const { colunaImpar, colunaPar, colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.state;
+    const { impar, par, colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.state;
 
     return (
       <div> xadrez da ovelha estoica :)
         <div className="container">
 
-          <Coluna colunaImpar={colunaImpar} nome="A" pecas={colunaA} />
+          <Coluna tipoDeColuna={impar} nome="A" pecas={colunaA} />
 
-          <Coluna colunaImpar={colunaPar} nome="B" pecas={colunaB} />
+          <Coluna tipoDeColuna={par} nome="B" pecas={colunaB} />
 
-          <Coluna colunaImpar={colunaImpar} nome="C" pecas={colunaC} />
+          <Coluna tipoDeColuna={impar} nome="C" pecas={colunaC} />
 
-          <Coluna colunaImpar={colunaPar} nome="D" pecas={colunaD} />
+          <Coluna tipoDeColuna={par} nome="D" pecas={colunaD} />
 
-          <Coluna colunaImpar={colunaImpar} nome="E" pecas={colunaE} />
+          <Coluna tipoDeColuna={impar} nome="E" pecas={colunaE} />
 
-          <Coluna colunaImpar={colunaPar} nome="F" pecas={colunaF} />
+          <Coluna tipoDeColuna={par} nome="F" pecas={colunaF} />
 
-          <Coluna colunaImpar={colunaImpar} nome="G" pecas={colunaG} />
+          <Coluna tipoDeColuna={impar} nome="G" pecas={colunaG} />
 
-          <Coluna colunaImpar={colunaPar} nome="H" pecas={this.state.colunaH} />
+          <Coluna tipoDeColuna={par} nome="H" pecas={colunaH} />
 
 
         </div>

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import Torre from '../Torre';
-import Peao from '../Peao';
 
 class Coluna extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      colunaImpar: props.colunaImpar,
+      tipoDeColuna: props.tipoDeColuna,
       pecas: props.pecas
     }
 
   }
 
   render() {
-    const { colunaImpar, pecas } = this.state;
+    const { tipoDeColuna, pecas } = this.state;
 
     return (
-      <div className={colunaImpar}>
+      <div className={tipoDeColuna}>
         {pecas.map((peca, i) => {
+          if (peca.props.cor) {
+            console.log(peca.props.cor);
+          }
           return <div key={i} > {peca} </div>;
         })}
       </div>
