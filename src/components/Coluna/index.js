@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
+import Torre from '../Torre';
+import Peao from '../Peao';
 
 class Coluna extends Component {
-  constructor() {
-    super();
-  }
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-  }
+    this.state = {
+      colunaImpar: props.colunaImpar,
+      pecas: props.pecas
+    }
 
+  }
 
   render() {
+    const { colunaImpar, pecas } = this.state;
+
     return (
-      <div className={cor}>
-        <span>
-          {bispo}
-        </span>
+      <div className={colunaImpar}>
+        {pecas.map((peca, i) => {
+          return <div key={i} > {peca} </div>;
+        })}
       </div>
     );
   }

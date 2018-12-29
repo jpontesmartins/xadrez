@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
-import Torre from '../Torre';
-import Cavalo from '../Cavalo';
-import Bispo from '../Bispo';
-import Rainha from '../Rainha';
-import Rei from '../Rei';
-import Peao from '../Peao';
+import Coluna from '../Coluna';
+import builderColumns from './builderColumns';
 
 class Tabuleiro extends Component {
   constructor() {
@@ -13,115 +9,44 @@ class Tabuleiro extends Component {
 
     this.state = {
       colunaImpar: "container-chess-white",
-      colunaPar: "container-chess-black"
+      colunaPar: "container-chess-black",
+      colunaA: builderColumns.buildColumnA(),
+      colunaB: builderColumns.buildColumnB(),
+      colunaC: builderColumns.buildColumnC(),
+      colunaD: builderColumns.buildColumnD(),
+      colunaE: builderColumns.buildColumnE(),
+      colunaF: builderColumns.buildColumnF(),
+      colunaG: builderColumns.buildColumnG(),
+      colunaH: builderColumns.buildColumnH(),
     }
   }
 
-  render() {
 
-    const { colunaImpar, colunaPar } = this.state;
+
+  render() {
+    const { colunaImpar, colunaPar, colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.state;
 
     return (
       <div> xadrez da ovelha estoica :)
         <div className="container">
 
-          {/* coluna A */}
-          <div className={colunaImpar}>
-            <Torre cor="preta"/>
-            <Peao cor="preta" casa="A1"/>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca" casa="A1" />
-            <Torre cor="branca" />
-          </div>
+          <Coluna colunaImpar={colunaImpar} nome="A" pecas={colunaA} />
 
-          {/* coluna B */}
-          <div className={colunaPar}>
-            <Cavalo cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca" casa="B1"/>
-            <Cavalo cor="branca"/>
-          </div>
+          <Coluna colunaImpar={colunaPar} nome="B" pecas={colunaB} />
 
-          {/* coluna C */}
-          <div className={colunaImpar}>
-            <Bispo cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Bispo cor="branca"/>
-          </div>
+          <Coluna colunaImpar={colunaImpar} nome="C" pecas={colunaC} />
 
-          {/* coluna D */}
-          <div className={colunaPar}>
-            <Rainha cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Rainha cor="branca"/>
-          </div>
+          <Coluna colunaImpar={colunaPar} nome="D" pecas={colunaD} />
 
-          {/* coluna E */}
-          <div className={colunaImpar}>
-            <Rei cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Rei cor="branca"/>
-          </div>
+          <Coluna colunaImpar={colunaImpar} nome="E" pecas={colunaE} />
+
+          <Coluna colunaImpar={colunaPar} nome="F" pecas={colunaF} />
+
+          <Coluna colunaImpar={colunaImpar} nome="G" pecas={colunaG} />
+
+          <Coluna colunaImpar={colunaPar} nome="H" pecas={this.state.colunaH} />
 
 
-          {/* coluna F */}
-          <div className={colunaPar}>
-            <Bispo cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Bispo cor="branca"/>
-          </div>
-
-          {/* coluna G */}
-          <div className={colunaImpar}>
-            <Cavalo cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Cavalo cor="branca"/>
-          </div>
-
-
-          {/* coluna H */}
-          <div className={colunaPar}>
-            <Torre cor="preta" />
-            <Peao cor="preta" />
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <Peao cor="branca"/>
-            <Torre cor="branca"/>
-          </div>
         </div>
 
       </div>
