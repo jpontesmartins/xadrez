@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 
 class Rainha extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      cor: ""
+      cor: "",
+      linha: this.props.linha,
+      coluna: this.props.coluna
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  getCasa() {
+    if (this.state) {
+      if (this.state.linha && this.state.coluna) {
+        return `${this.state.coluna}${this.state.linha}`;
+      }
+    }
+    return 'vazio';
+
+  }
+
+  handleClick() {
+    const { cor } = this.state;
+    console.log(`Rainha da cor ${cor} na casa ${this.getCasa()}`);
+  }
+
 
   componentDidMount() {
     if (this.props.cor == 'branca') {
@@ -26,7 +46,7 @@ class Rainha extends Component {
     const { cor } = this.state;
     
     return (
-      <div className={cor}>
+      <div className={cor} onClick={this.handleClick}>
         <span>
           {rainha}
         </span>

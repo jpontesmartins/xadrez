@@ -24,7 +24,9 @@ class Tabuleiro extends Component {
 
 
   render() {
-    const { impar, par, colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.state;
+    const { impar, par, colunaA, colunaB, colunaC, 
+            colunaD, colunaE, colunaF, colunaG, colunaH 
+          } = this.state;
 
     return (
       <div> xadrez da ovelha estoica :)

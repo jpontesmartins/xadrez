@@ -6,16 +6,17 @@ import Bispo from '../Bispo';
 import Rainha from '../Rainha';
 import Rei from '../Rei';
 import Peao from '../Peao';
+import Casa from '../Casa';
 
 const buildColumnA = () => {
   const nomeColuna = "A";
   let colunas = new Map();
   colunas.set(8, <Torre cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -37,10 +38,10 @@ const buildColumnB = () => {
   let colunas = new Map();
   colunas.set(8, <Cavalo cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -64,10 +65,10 @@ const buildColumnC = () => {
   let colunas = new Map();
   colunas.set(8, <Bispo cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -90,10 +91,10 @@ const buildColumnD = () => {
   let colunas = new Map();
   colunas.set(8, <Rainha cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Rainha cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -117,10 +118,10 @@ const buildColumnE = () => {
   let colunas = new Map();
   colunas.set(8, <Rei cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Rei cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -143,10 +144,10 @@ const buildColumnF = () => {
   let colunas = new Map();
   colunas.set(8, <Bispo cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -169,10 +170,10 @@ const buildColumnG = () => {
   let colunas = new Map();
   colunas.set(8, <Cavalo cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
 
@@ -195,10 +196,10 @@ const buildColumnH = () => {
   let colunas = new Map();
   colunas.set(8, <Torre cor="preta" coluna={nomeColuna} linha="8" />);
   colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <div></div>);
-  colunas.set(5, <div></div>);
-  colunas.set(4, <div></div>);
-  colunas.set(3, <div></div>);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
 

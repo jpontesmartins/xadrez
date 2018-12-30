@@ -6,8 +6,22 @@ class Torre extends Component {
     super(props);
 
     this.state = {
-      cor: ""
+      cor: "",
+      linha: this.props.linha,
+      coluna: this.props.coluna
     }
+
+    this.handleClick = this.handleClick.bind(this);
+
+  }
+
+  getCasa() {
+    if (this.state) {
+      if (this.state.linha && this.state.coluna) {
+        return `${this.state.coluna}${this.state.linha}`;
+      }
+    }
+    return 'vazio';
 
   }
 
@@ -23,13 +37,18 @@ class Torre extends Component {
     }
   }
 
+  handleClick() {
+    const { cor } = this.state;
+    console.log(`Torre da cor ${cor} na casa ${this.getCasa()}`);
+  }
+
   render() {
     const torre = "♜";
-    
+
     const { cor } = this.state;
     return (
-      <div>
-        <span className={cor}>
+      <div className={cor} onClick={this.handleClick}>
+        <span>
           {torre}
         </span>
       </div>

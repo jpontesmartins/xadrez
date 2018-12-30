@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './styles.css';
 
-class Bispo extends Component {
+class Casa extends Component {
   constructor(props) {
     super(props);
 
@@ -20,14 +21,8 @@ class Bispo extends Component {
       }
     }
     return 'vazio';
+
   }
-
-
-  handleClick() {
-    const { cor } = this.state;
-    console.log(`Bispo da cor ${cor} na casa ${this.getCasa()}`);
-  }
-
 
   componentDidMount() {
     if (this.props.cor == 'branca') {
@@ -41,18 +36,16 @@ class Bispo extends Component {
     }
   }
 
+  handleClick() {
+    console.log(`Casa vazia: ${this.getCasa()}`);
+  }
 
   render() {
-    const bispo = "♝";
-    const { cor } = this.state;
     return (
-      <div className={cor}  onClick={this.handleClick}>
-        <span>
-          {bispo}
-        </span>
+      <div onClick={this.handleClick} className="vazia">
       </div>
     );
   }
 }
 
-export default Bispo;
+export default Casa;
