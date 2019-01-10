@@ -8,8 +8,8 @@ class Peao extends Component {
     this.state = {
       cor: "",
       casa: "",
-      linha: "",
-      coluna: ""
+      linha: this.props.linha,
+      coluna: this.props.coluna
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -26,20 +26,15 @@ class Peao extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     if (this.props.cor == 'branca') {
       this.setState({
         cor: 'branca',
-        casa: this.props.casa,
-        linha: this.props.linha,
-        coluna: this.props.coluna
+        casa: this.props.casa
       })
     } else {
       this.setState({
         cor: 'preta',
-        casa: this.props.casa,
-        linha: this.props.linha,
-        coluna: this.props.coluna
+        casa: this.props.casa
       })
     }
   }

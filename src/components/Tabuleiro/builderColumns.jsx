@@ -20,17 +20,7 @@ const buildColumnA = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 };
 
 const buildColumnB = () => {
@@ -45,17 +35,7 @@ const buildColumnB = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 
@@ -72,17 +52,7 @@ const buildColumnC = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 const buildColumnD = () => {
@@ -98,17 +68,7 @@ const buildColumnD = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Rainha cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 
@@ -125,17 +85,7 @@ const buildColumnE = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Rei cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 const buildColumnF = () => {
@@ -151,17 +101,7 @@ const buildColumnF = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 const buildColumnG = () => {
@@ -177,17 +117,7 @@ const buildColumnG = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
 
-  let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
-  ]
-  return posicoes;
+  return posicionarPecas(colunas);
 }
 
 const buildColumnH = () => {
@@ -203,6 +133,10 @@ const buildColumnH = () => {
   colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
   colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
 
+  return posicionarPecas(colunas);
+}
+
+let posicionarPecas = colunas => {
   let posicoes = [
     colunas.get(8),
     colunas.get(7),
@@ -212,7 +146,7 @@ const buildColumnH = () => {
     colunas.get(3),
     colunas.get(2),
     colunas.get(1)
-  ]
+  ];
   return posicoes;
 }
 

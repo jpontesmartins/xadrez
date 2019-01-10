@@ -17,9 +17,6 @@ class Coluna extends Component {
     return (
       <div className={tipoDeColuna}>
         {pecas.map((peca, i) => {
-          if (peca.props.cor) {
-            console.log(peca.props.cor);
-          }
           return <div key={i} > {peca} </div>;
         })}
       </div>
