@@ -1,53 +1,44 @@
 import React, { Component } from 'react';
 import './styles.css';
 import Coluna from '../Coluna';
-import builderColumns from './builderColumns';
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+
+import { montarTabuleiro } from '../../actions'
 
 class Tabuleiro extends Component {
   constructor() {
     super();
-
-    this.state = {
-      impar: "container-chess-white",
-      par: "container-chess-black",
-      colunaA: builderColumns.buildColumnA(),
-      colunaB: builderColumns.buildColumnB(),
-      colunaC: builderColumns.buildColumnC(),
-      colunaD: builderColumns.buildColumnD(),
-      colunaE: builderColumns.buildColumnE(),
-      colunaF: builderColumns.buildColumnF(),
-      colunaG: builderColumns.buildColumnG(),
-      colunaH: builderColumns.buildColumnH(),
-    }
   }
 
-
+  componentDidMount() {
+    this.props.montarTabuleiro();
+  }
 
   render() {
-    const { impar, par, colunaA, colunaB, colunaC, 
-            colunaD, colunaE, colunaF, colunaG, colunaH 
-          } = this.state;
-
+    const { colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.props;
     return (
+
       <div> xadrez da ovelha estoica :)
+        <div onClick={this.props.montarTabuleiro}>[organizar tabuleiro]</div>
         <div className="container">
 
-          <Coluna tipoDeColuna={impar} nome="A" pecas={colunaA} />
+          <Coluna tipoDeColuna="container-chess-white" nome="A" pecas={colunaA} />
 
-          <Coluna tipoDeColuna={par} nome="B" pecas={colunaB} />
+          <Coluna tipoDeColuna="container-chess-black" nome="B" pecas={colunaB} />
 
-          <Coluna tipoDeColuna={impar} nome="C" pecas={colunaC} />
+          <Coluna tipoDeColuna="container-chess-white" nome="C" pecas={colunaC} />
 
-          <Coluna tipoDeColuna={par} nome="D" pecas={colunaD} />
+          <Coluna tipoDeColuna="container-chess-black" nome="D" pecas={colunaD} />
 
-          <Coluna tipoDeColuna={impar} nome="E" pecas={colunaE} />
+          <Coluna tipoDeColuna="container-chess-white" nome="E" pecas={colunaE} />
 
-          <Coluna tipoDeColuna={par} nome="F" pecas={colunaF} />
+          <Coluna tipoDeColuna="container-chess-black" nome="F" pecas={colunaF} />
 
-          <Coluna tipoDeColuna={impar} nome="G" pecas={colunaG} />
+          <Coluna tipoDeColuna="container-chess-white" nome="G" pecas={colunaG} />
 
-          <Coluna tipoDeColuna={par} nome="H" pecas={colunaH} />
-
+          <Coluna tipoDeColuna="container-chess-black" nome="H" pecas={colunaH} />
 
         </div>
 
@@ -56,4 +47,17 @@ class Tabuleiro extends Component {
   }
 }
 
-export default Tabuleiro;
+const mapStateToProps = state => ({
+  colunaA: state.tabuleiroReducer.colunaA,
+  colunaB: state.tabuleiroReducer.colunaB,
+  colunaC: state.tabuleiroReducer.colunaC,
+  colunaD: state.tabuleiroReducer.colunaD,
+  colunaE: state.tabuleiroReducer.colunaE,
+  colunaF: state.tabuleiroReducer.colunaF,
+  colunaG: state.tabuleiroReducer.colunaG,
+  colunaH: state.tabuleiroReducer.colunaH
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ montarTabuleiro }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tabuleiro);
