@@ -4,7 +4,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'PECA_SELECIONADA':
+    case 'SELECIONAR_PECA':
       return { ...state, pecaSelecionada: true }
     default:
       return state

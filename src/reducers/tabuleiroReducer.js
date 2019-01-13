@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'TABULEIRO_MONTADO':
+    case 'MONTAR_TABULEIRO':
       return {
         ...state,
         colunaA: builderColumns.buildColumnA(),

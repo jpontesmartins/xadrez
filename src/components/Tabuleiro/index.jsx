@@ -48,14 +48,14 @@ class Tabuleiro extends Component {
 }
 
 const mapStateToProps = state => ({
-  colunaA: state.tabuleiroReducer.colunaA,
-  colunaB: state.tabuleiroReducer.colunaB,
-  colunaC: state.tabuleiroReducer.colunaC,
-  colunaD: state.tabuleiroReducer.colunaD,
-  colunaE: state.tabuleiroReducer.colunaE,
-  colunaF: state.tabuleiroReducer.colunaF,
-  colunaG: state.tabuleiroReducer.colunaG,
-  colunaH: state.tabuleiroReducer.colunaH
+  colunaA: state.montarTabuleiro.colunaA,
+  colunaB: state.montarTabuleiro.colunaB,
+  colunaC: state.montarTabuleiro.colunaC,
+  colunaD: state.montarTabuleiro.colunaD,
+  colunaE: state.montarTabuleiro.colunaE,
+  colunaF: state.montarTabuleiro.colunaF,
+  colunaG: state.montarTabuleiro.colunaG,
+  colunaH: state.montarTabuleiro.colunaH
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ montarTabuleiro }, dispatch);

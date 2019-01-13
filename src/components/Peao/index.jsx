@@ -4,65 +4,58 @@ import '../Tabuleiro/styles.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-//action que será chamada ao eu clicar numa peca
 import { selecionarPeca } from '../../actions';
 
 class Peao extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cor: "",
-      casa: "",
-      linha: this.props.linha,
-      coluna: this.props.coluna,
-      pecaSelecionada: false
-    }
+  constructor() {
+    super();
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   getCasa() {
-    if (this.state) {
-      if (this.state.linha && this.state.coluna) {
-        return `${this.state.coluna}${this.state.linha}`;
+    if (this.props) {
+      if (this.props.linha && this.props.coluna) {
+        return `${this.props.coluna}${this.props.linha}`;
       }
     }
     return 'vazio';
-
   }
 
   componentDidMount() {
+    this.corDaPeca();
+  }
+
+  corDaPeca() {
     if (this.props.cor == 'branca') {
       this.setState({
         cor: 'branca',
         casa: this.props.casa
-      })
-    } else {
+      });
+    }
+    else {
       this.setState({
         cor: 'preta',
         casa: this.props.casa
-      })
+      });
     }
   }
 
   handleClick() {
-    const { cor, pecaSelecionada } = this.state;
+    this.props.selecionarPeca();
+
+    console.log(this.props);
+    console.log('----');
+
+    const { cor, pecaSelecionada } = this.props;
 
     console.log('testando... 13-01');
 
     if (pecaSelecionada) {
       console.log('clique de movimentação');
-      this.setState({
-        pecaSelecionada: false
-      })
     } else {
       console.log('clique de seleção de peça');
-      this.setState({
-        pecaSelecionada: true
-      })
     }
-
 
     console.log(`peão da cor ${cor} na casa ${this.getCasa()}`);
   }
@@ -74,10 +67,10 @@ class Peao extends Component {
 
   render() {
     const peao = "♟";
-    const { cor } = this.state;
+    const { cor } = this.props;
 
     return (
-      <div className={cor} onClick={this.props.selecionarPeca}>
+      <div className={cor} onClick={this.handleClick}>
         <span>
           {peao}
         </span>
@@ -87,9 +80,9 @@ class Peao extends Component {
 }
 
 const mapStateToProps = state => ({
-  list: state.selectPieceReducer
+  list: state.selecionarPeca
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({selecionarPeca}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peao);
