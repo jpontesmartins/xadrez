@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import '../Tabuleiro/styles.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+//action que será chamada ao eu clicar numa peca
+import { selecionarPeca } from '../../actions';
+
 class Peao extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +15,8 @@ class Peao extends Component {
       cor: "",
       casa: "",
       linha: this.props.linha,
-      coluna: this.props.coluna
+      coluna: this.props.coluna,
+      pecaSelecionada: false
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -40,8 +47,29 @@ class Peao extends Component {
   }
 
   handleClick() {
-    const { cor } = this.state;
+    const { cor, pecaSelecionada } = this.state;
+
+    console.log('testando... 13-01');
+
+    if (pecaSelecionada) {
+      console.log('clique de movimentação');
+      this.setState({
+        pecaSelecionada: false
+      })
+    } else {
+      console.log('clique de seleção de peça');
+      this.setState({
+        pecaSelecionada: true
+      })
+    }
+
+
     console.log(`peão da cor ${cor} na casa ${this.getCasa()}`);
+  }
+
+  handleSecondClick() {
+    console.log('fazer a validação do segundo clique, o clique de escolha da casa de destino');
+
   }
 
   render() {
@@ -49,7 +77,7 @@ class Peao extends Component {
     const { cor } = this.state;
 
     return (
-      <div className={cor} onClick={this.handleClick}>
+      <div className={cor} onClick={this.props.selecionarPeca}>
         <span>
           {peao}
         </span>
@@ -58,5 +86,10 @@ class Peao extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  list: state.selectPieceReducer
+});
 
-export default Peao;
+const mapDispatchToProps = dispatch => bindActionCreators({selecionarPeca}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Peao);

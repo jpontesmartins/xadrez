@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Coluna extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tipoDeColuna: props.tipoDeColuna,
-      pecas: props.pecas
-    }
-
+  constructor() {
+    super();
   }
 
   render() {
-    const { tipoDeColuna, pecas } = this.state;
+    console.log(this.props);
+    const { tipoDeColuna, pecas } = this.props;
 
-    return (
-      <div className={tipoDeColuna}>
-        {pecas.map((peca, i) => {
-          return <div key={i} > {peca} </div>;
-        })}
-      </div>
-    );
+    if (pecas) {
+      return (
+        <div className={tipoDeColuna}>
+          {pecas.map((peca, i) => {
+            return <div key={i} > {peca} </div>;
+          })}
+        </div>
+      );
+    } else {
+      return (<div> problemas ao montar o tabuleiro.. </div>)
+    }
+    
   }
 }
 
-export default Coluna;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(Coluna);
