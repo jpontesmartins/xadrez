@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { selecionarPeca } from '../../actions';
+import { } from '../comum.js';
 
-class Peao extends Component {
+class Peca extends Component {
   constructor() {
     super();
 
@@ -43,13 +44,7 @@ class Peao extends Component {
 
   handleClick() {
     this.props.selecionarPeca();
-
-    console.log(this.props);
-    console.log('----');
-
-    const { cor, pecaSelecionada } = this.props;
-
-    console.log('testando... 13-01');
+    const { cor, pecaSelecionada, peca } = this.props;
 
     if (pecaSelecionada) {
       console.log('clique de movimentação');
@@ -57,7 +52,7 @@ class Peao extends Component {
       console.log('clique de seleção de peça');
     }
 
-    console.log(`peão da cor ${cor} na casa ${this.getCasa()}`);
+    console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
 
   handleSecondClick() {
@@ -66,18 +61,30 @@ class Peao extends Component {
   }
 
   render() {
-    const peao = "♟";
-    const { cor } = this.props;
+    const { cor, peca } = this.props;
+
+    // console.log(peca.descricao);
+    // console.log(peca.simbolo);
 
     return (
       <div className={cor} onClick={this.handleClick}>
         <span>
-          {peao}
+          {peca.simbolo}
         </span>
       </div>
     );
   }
 }
+
+Peca.propTypes = {
+  // cor: PropTypes.string
+//   descricao: PropTypes.string,
+//   simbolo: PropTypes.string,
+//   linha: PropTypes.string,
+//   coluna: PropTypes.string,
+//   casa: PropTypes.string,
+//   pecaSelecionada: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
   list: state.selecionarPeca
@@ -85,4 +92,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Peao);
+export default connect(mapStateToProps, mapDispatchToProps)(Peca);

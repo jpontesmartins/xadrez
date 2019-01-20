@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 
-import Torre from '../Torre';
-import Cavalo from '../Cavalo';
-import Bispo from '../Bispo';
-import Rainha from '../Rainha';
-import Rei from '../Rei';
-import Peao from '../Peao';
 import Casa from '../Casa';
+import Peca from '../Peca';
+import { TORRE, PEAO, CAVALO, BISPO, DAMA, REI } from '../constants';
 
 const buildColumnA = () => {
   const nomeColuna = "A";
   let colunas = new Map();
-  colunas.set(8, <Torre cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={TORRE} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={TORRE} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 };
@@ -26,14 +22,14 @@ const buildColumnA = () => {
 const buildColumnB = () => {
   const nomeColuna = "B";
   let colunas = new Map();
-  colunas.set(8, <Cavalo cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -43,14 +39,14 @@ const buildColumnC = () => {
   const nomeColuna = "C";
 
   let colunas = new Map();
-  colunas.set(8, <Bispo cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={BISPO} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={BISPO} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -59,14 +55,14 @@ const buildColumnD = () => {
   const nomeColuna = "D";
 
   let colunas = new Map();
-  colunas.set(8, <Rainha cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={DAMA} peca={DAMA} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Rainha cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={DAMA} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -76,14 +72,14 @@ const buildColumnE = () => {
   const nomeColuna = "E";
 
   let colunas = new Map();
-  colunas.set(8, <Rei cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={REI} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Rei cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={REI} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -92,14 +88,14 @@ const buildColumnF = () => {
   const nomeColuna = "F";
 
   let colunas = new Map();
-  colunas.set(8, <Bispo cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={BISPO} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Bispo cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={BISPO} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -108,14 +104,14 @@ const buildColumnG = () => {
   const nomeColuna = "G";
 
   let colunas = new Map();
-  colunas.set(8, <Cavalo cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Cavalo cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
@@ -124,14 +120,14 @@ const buildColumnH = () => {
   const nomeColuna = "H";
 
   let colunas = new Map();
-  colunas.set(8, <Torre cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peao cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(8, <Peca peca={TORRE} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
   colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peao cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Torre cor="branca" coluna={nomeColuna} linha="1" />);
+  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
+  colunas.set(1, <Peca peca={TORRE} cor="branca" coluna={nomeColuna} linha="1" />);
 
   return posicionarPecas(colunas);
 }
