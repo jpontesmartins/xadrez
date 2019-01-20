@@ -25,25 +25,6 @@ class Peca extends Component {
     return 'vazio';
   }
 
-  componentDidMount() {
-    this.corDaPeca();
-  }
-
-  corDaPeca() {
-    if (this.props.cor == 'branca') {
-      this.setState({
-        cor: 'branca',
-        casa: this.props.casa
-      });
-    }
-    else {
-      this.setState({
-        cor: 'preta',
-        casa: this.props.casa
-      });
-    }
-  }
-
   handleClick() {
     this.props.selecionarPeca();
     const { cor, pecaSelecionada, peca } = this.props;
@@ -60,7 +41,6 @@ class Peca extends Component {
 
   handleSecondClick() {
     console.log('fazer a validação do segundo clique, o clique de escolha da casa de destino');
-
   }
 
   render() {
