@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { selecionarPeca } from '../../store/actions';
-import { } from '../comum.js';
+import PecaComponent from './PecaComponent';
 
 class Peca extends Component {
   constructor() {
@@ -26,8 +26,13 @@ class Peca extends Component {
   }
 
   handleClick() {
-    this.props.selecionarPeca();
-    const { cor, pecaSelecionada, peca } = this.props;
+    const { cor,
+            pecaSelecionada,
+            peca,
+            selecionarPeca 
+          } = this.props;
+
+    selecionarPeca();
 
     if (pecaSelecionada) {
       console.log('clique de movimentação');
@@ -47,11 +52,7 @@ class Peca extends Component {
     const { cor, peca } = this.props;
 
     return (
-      <div className={cor} onClick={this.handleClick}>
-        <span>
-          {peca.simbolo}
-        </span>
-      </div>
+      <PecaComponent cor={cor} onClick={this.handleClick} simbolo={peca.simbolo} />
     );
   }
 }
