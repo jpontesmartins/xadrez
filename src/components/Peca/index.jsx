@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import '../Tabuleiro/styles.css';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { selecionarPeca } from '../../actions';
+import { selecionarPeca } from '../../store/actions';
 import { } from '../comum.js';
 
 class Peca extends Component {
@@ -12,6 +13,7 @@ class Peca extends Component {
     super();
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleSecondClick = this.handleSecondClick.bind(this);
   }
 
   getCasa() {
@@ -50,6 +52,7 @@ class Peca extends Component {
       console.log('clique de movimentação');
     } else {
       console.log('clique de seleção de peça');
+      this.handleSecondClick();
     }
 
     console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
@@ -63,9 +66,6 @@ class Peca extends Component {
   render() {
     const { cor, peca } = this.props;
 
-    // console.log(peca.descricao);
-    // console.log(peca.simbolo);
-
     return (
       <div className={cor} onClick={this.handleClick}>
         <span>
@@ -77,13 +77,13 @@ class Peca extends Component {
 }
 
 Peca.propTypes = {
-  // cor: PropTypes.string
-//   descricao: PropTypes.string,
-//   simbolo: PropTypes.string,
-//   linha: PropTypes.string,
-//   coluna: PropTypes.string,
-//   casa: PropTypes.string,
-//   pecaSelecionada: PropTypes.bool
+  cor: PropTypes.string,
+  descricao: PropTypes.string,
+  simbolo: PropTypes.string,
+  linha: PropTypes.string,
+  coluna: PropTypes.string,
+  casa: PropTypes.string,
+  pecaSelecionada: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

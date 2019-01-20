@@ -5,7 +5,7 @@ import Coluna from '../Coluna';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-import { montarTabuleiro } from '../../actions'
+import { montarTabuleiro } from '../../store/actions'
 
 class Tabuleiro extends Component {
   constructor() {

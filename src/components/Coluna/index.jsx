@@ -9,6 +9,7 @@ class Coluna extends Component {
   render() {
     // console.log(this.props);
     const { tipoDeColuna, pecas } = this.props;
+    console.log(pecas);
 
     if (pecas) {
       return (

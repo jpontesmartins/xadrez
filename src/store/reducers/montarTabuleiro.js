@@ -1,4 +1,4 @@
-import builderColumns from '../components/Tabuleiro/builderColumns';
+import builderColumns from '../../components/Tabuleiro/builderColumns';
 
 const INITIAL_STATE = {
   colunaA: "",
