@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
+import { BRANCA, PRETA } from '../constants';
 
 class Casa extends Component {
   constructor(props) {
@@ -25,13 +26,13 @@ class Casa extends Component {
   }
 
   componentDidMount() {
-    if (this.props.cor == 'branca') {
+    if (this.props.cor == BRANCA) {
       this.setState({
-        cor: 'branca'
+        cor: BRANCA
       })
     } else {
       this.setState({
-        cor: 'preta'
+        cor: PRETA
       })
     }
   }
