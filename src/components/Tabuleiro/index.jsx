@@ -1,44 +1,45 @@
 import React, { Component } from 'react';
-import './styles.css';
-import Coluna from '../Coluna';
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
+import Coluna from '../Coluna';
 import { montarTabuleiro } from '../../store/actions'
 
+import './styles.css';
+
 class Tabuleiro extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   componentDidMount() {
-    this.props.montarTabuleiro();
+    const { montarTabuleiro } = this.props;
+    montarTabuleiro();
   }
 
   render() {
-    const { colunaA, colunaB, colunaC, colunaD, colunaE, colunaF, colunaG, colunaH } = this.props;
+    const {
+      colunaA, colunaB, colunaC,
+      colunaD, colunaE, colunaF,
+      colunaG, colunaH, montarTabuleiro } = this.props;
+
+    const white = "container-chess-white";
+    const black = "container-chess-black";
+
     return (
 
       <div> xadrez da ovelha estoica :)
-        <div onClick={this.props.montarTabuleiro}>[organizar tabuleiro]</div>
+        <div onClick={montarTabuleiro}>[organizar tabuleiro]</div>
         <div className="container">
 
-          <Coluna tipoDeColuna="container-chess-white" nome="A" pecas={colunaA} />
-
-          <Coluna tipoDeColuna="container-chess-black" nome="B" pecas={colunaB} />
-
-          <Coluna tipoDeColuna="container-chess-white" nome="C" pecas={colunaC} />
-
-          <Coluna tipoDeColuna="container-chess-black" nome="D" pecas={colunaD} />
-
-          <Coluna tipoDeColuna="container-chess-white" nome="E" pecas={colunaE} />
-
-          <Coluna tipoDeColuna="container-chess-black" nome="F" pecas={colunaF} />
-
-          <Coluna tipoDeColuna="container-chess-white" nome="G" pecas={colunaG} />
-
-          <Coluna tipoDeColuna="container-chess-black" nome="H" pecas={colunaH} />
+          <Coluna tipoDeColuna={white} nome="A" pecas={colunaA} />
+          <Coluna tipoDeColuna={black} nome="B" pecas={colunaB} />
+          <Coluna tipoDeColuna={white} nome="C" pecas={colunaC} />
+          <Coluna tipoDeColuna={black} nome="D" pecas={colunaD} />
+          <Coluna tipoDeColuna={white} nome="E" pecas={colunaE} />
+          <Coluna tipoDeColuna={black} nome="F" pecas={colunaF} />
+          <Coluna tipoDeColuna={white} nome="G" pecas={colunaG} />
+          <Coluna tipoDeColuna={black} nome="H" pecas={colunaH} />
 
         </div>
 
