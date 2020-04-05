@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import './styles.css';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+
+import { moverPeca } from '../../store/actions';
 import { BRANCA, PRETA } from '../constants';
+
+import './styles.css';
 
 class Casa extends Component {
   constructor(props) {
@@ -39,6 +44,13 @@ class Casa extends Component {
 
   handleClick() {
     console.log(`Casa vazia: ${this.getCasa()}`);
+    console.log(this.props);
+    console.log(`Mover peca para cá: ${this.getCasa()}`);
+    console.log(this.props.pecaSelecionada);
+
+    const { pecaSelecionada, coluna, linha, corDaPeca, moverPeca } = this.props;
+    moverPeca(pecaSelecionada, linha, coluna, corDaPeca);
+
   }
 
   render() {
@@ -49,4 +61,11 @@ class Casa extends Component {
   }
 }
 
-export default Casa;
+const mapStateToProps = state => ({
+  pecaSelecionada: state.selecionarPeca.pecaSelecionada,
+  corDaPeca: state.selecionarPeca.cor
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Casa);
