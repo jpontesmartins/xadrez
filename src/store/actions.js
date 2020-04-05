@@ -1,6 +1,11 @@
-export const selecionarPeca = (event) => ({
+export const selecionarPeca = (peca, linha, coluna, cor) => ({
   type: 'SELECIONAR_PECA',
-  pecaSelecionada: event
+  payload: {
+    peca,
+    linha,
+    coluna,
+    cor
+  }
 });
 
 export const montarTabuleiro = () => ({

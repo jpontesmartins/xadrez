@@ -1,12 +1,18 @@
-const INITIAL_STATE = { 
-  pecaSelecionada: false
+const INITIAL_STATE = {
+  pecaSelecionada: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SELECIONAR_PECA':
-    console.log('reducer SELECIONAR_PECA');
-      return { ...state, pecaSelecionada: true }
+      const newState = {
+        ...state, 
+        pecaSelecionada: action.payload.peca, 
+        linha: action.payload.linha,
+        coluna: action.payload.coluna,
+        cor: action.payload.cor
+      };
+      return newState;
     default:
       return state
   }

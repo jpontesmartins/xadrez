@@ -17,6 +17,11 @@ class Tabuleiro extends Component {
     montarTabuleiro();
   }
 
+  componentDidUpdate(prevProps) {
+    console.log("montar tabuleiro");
+    console.log(this.props);
+  }
+
   render() {
     const {
       colunaA, colunaB, colunaC,
