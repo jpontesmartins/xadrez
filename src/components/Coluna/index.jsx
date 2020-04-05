@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Coluna extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
+
+  componentDidUpdate(prevProps) { }
 
   render() {
     const { tipoDeColuna, pecas } = this.props;
-    console.log(pecas);
-
     if (pecas) {
       return (
         <div className={tipoDeColuna}>
@@ -21,10 +21,12 @@ class Coluna extends Component {
     } else {
       return (<div> problemas ao montar o tabuleiro.. </div>)
     }
-    
+
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  pecaSelecionada: state.selecionarPeca
+});
 
 export default connect(mapStateToProps)(Coluna);

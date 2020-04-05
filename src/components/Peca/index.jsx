@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import '../Tabuleiro/styles.css';
-import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { selecionarPeca } from '../../store/actions';
 import PecaComponent from './PecaComponent';
 
+import '../Tabuleiro/styles.css';
+
 class Peca extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleSecondClick = this.handleSecondClick.bind(this);
   }
 
   getCasa() {
@@ -25,31 +23,24 @@ class Peca extends Component {
     return 'vazio';
   }
 
+  componentDidUpdate(prevProps) {
+  }
+
   handleClick() {
-    const { cor,
-            pecaSelecionada,
-            peca,
-            selecionarPeca 
-          } = this.props;
-
-    selecionarPeca();
-
-    if (pecaSelecionada) {
-      console.log('clique de movimentação');
-    } else {
-      console.log('clique de seleção de peça');
-      this.handleSecondClick();
-    }
-
+    const { cor, peca, linha, coluna, selecionarPeca } = this.props;
+    selecionarPeca(peca, linha, coluna, cor);
     console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
 
-  handleSecondClick() {
-    console.log('fazer a validação do segundo clique, o clique de escolha da casa de destino');
-  }
-
   render() {
-    const { cor, peca } = this.props;
+    const { peca } = this.props;
+    let cor =  this.props.cor;
+
+    if (this.props.linha === this.props.pecaSelecionada.linha &&
+      this.props.coluna === this.props.pecaSelecionada.coluna) {
+        cor = "blue";
+      }
+
 
     return (
       <PecaComponent cor={cor} onClick={this.handleClick} simbolo={peca.simbolo} />
@@ -57,18 +48,8 @@ class Peca extends Component {
   }
 }
 
-Peca.propTypes = {
-  cor: PropTypes.string,
-  descricao: PropTypes.string,
-  simbolo: PropTypes.string,
-  linha: PropTypes.string,
-  coluna: PropTypes.string,
-  casa: PropTypes.string,
-  pecaSelecionada: PropTypes.bool
-};
-
 const mapStateToProps = state => ({
-  list: state.selecionarPeca
+  pecaSelecionada: state.selecionarPeca
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca }, dispatch);
