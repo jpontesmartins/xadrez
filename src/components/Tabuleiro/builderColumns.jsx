@@ -34,6 +34,25 @@ const buildColumnB = () => {
   return posicionarPecas(colunas);
 }
 
+const buildColumnB2 = () => {
+  //simulacao de movimento de peca... Peao branco sai da B2 para a B3
+  //lembrando que a casa da qual a peca saiou tem que ficar vaga..
+  const nomeColuna = "B";
+  let colunas = new Map();
+  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
+  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
+  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
+  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
+  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
+  
+  colunas.set(3, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="3" />);
+  colunas.set(2, <Casa coluna={nomeColuna} linha="2" />);
+
+  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
+
+  return posicionarPecas(colunas);
+}
+
 
 const buildColumnC = () => {
   const nomeColuna = "C";
@@ -149,6 +168,7 @@ let posicionarPecas = colunas => {
 export default {
   buildColumnA,
   buildColumnB,
+  buildColumnB2,
   buildColumnC,
   buildColumnD,
   buildColumnE,

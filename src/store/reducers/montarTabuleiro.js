@@ -36,14 +36,7 @@ export default (state = INITIAL_STATE, action) => {
 
         return {
           ...state,
-          colunaA: builderColumns.buildColumnA(),
-          colunaB: builderColumns.buildColumnB(),
-          colunaC: builderColumns.buildColumnC(),
-          colunaD: builderColumns.buildColumnD(),
-          colunaE: builderColumns.buildColumnE(),
-          colunaF: builderColumns.buildColumnF(),
-          colunaG: builderColumns.buildColumnG(),
-          colunaH: builderColumns.buildColumnH()
+          colunaB: builderColumns.buildColumnB2(),
         }
     default:
       return state
