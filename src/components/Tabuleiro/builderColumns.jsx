@@ -53,13 +53,13 @@ const buildColumnB2 = () => {
   return posicionarPecas(colunas);
 }
 
-const movePieceToColumnB = (casaOrigem, coluna, peca, linha, cor) => {
-  const nomeColuna = "B";
-
+const movePieceToColumn = (casaOrigem, coluna, peca, linha, cor) => {
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
+  const nomeColuna = casaOrigem.split("")[0];//"B";
+  
   console.log("linhaOrigem: " + linhaOrigem);
-
   console.log(coluna);
+
   let linhas = new Map();
   coluna.map((linhaProps, i) => {
     console.log | ("linhaProps");
@@ -214,5 +214,5 @@ export default {
   buildColumnF,
   buildColumnG,
   buildColumnH,
-  movePieceToColumnB
+  movePieceToColumnB: movePieceToColumn
 }
