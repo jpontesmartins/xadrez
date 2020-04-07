@@ -57,10 +57,10 @@ class Casa extends Component {
 }
 
 const mapStateToProps = state => ({
-  pecaSelecionada: state.selecionarPeca.pecaSelecionada,
-  corDaPeca: state.selecionarPeca.cor,
-  tabuleiro: state.montarTabuleiro.tabuleiro,
-  casaOrigem: state.selecionarPeca.casaOrigem
+  pecaSelecionada: state.pecas.pecaSelecionada,
+  corDaPeca: state.pecas.cor,
+  casaOrigem: state.pecas.casaOrigem,
+  tabuleiro: state.tabuleiro.tabuleiro
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca }, dispatch);

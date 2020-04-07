@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import selecionarPecaReducer from './reducers/selecionarPeca';
-import montarTabuleiroReducer from './reducers/montarTabuleiro';
+import selecionarPecaReducer from './reducers/pecas';
+import montarTabuleiroReducer from './reducers/tabuleiro';
 
 const rootReducer = combineReducers({
-  selecionarPeca: selecionarPecaReducer,
-  montarTabuleiro: montarTabuleiroReducer
+  pecas: selecionarPecaReducer,
+  tabuleiro: montarTabuleiroReducer
 })
 
 export default rootReducer;

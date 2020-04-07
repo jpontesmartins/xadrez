@@ -15,8 +15,6 @@ class Peca extends Component {
   }
 
   getCasa() {
-    // console.log("getCasa");
-    // console.log(this.props);
     if (this.props) {
       if (this.props.linha && this.props.coluna) {
         return `${this.props.coluna}${this.props.linha}`;
@@ -25,10 +23,7 @@ class Peca extends Component {
     return 'vazio';
   }
 
-  componentDidUpdate(prevProps) {
-    // console.log("PEca - prevProps");
-    // console.log(this.props)
-  }
+  componentDidUpdate(prevProps) {  }
 
   handleClick() {
     const { cor, peca, linha, coluna, selecionarPeca } = this.props;
@@ -53,7 +48,7 @@ class Peca extends Component {
 }
 
 const mapStateToProps = state => ({
-  pecaSelecionada: state.selecionarPeca
+  pecaSelecionada: state.pecas
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca }, dispatch);
