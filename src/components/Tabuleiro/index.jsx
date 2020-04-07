@@ -18,8 +18,9 @@ class Tabuleiro extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("montar tabuleiro");
-    console.log(this.props);
+    // console.log("montar tabuleiro");
+    // console.log(this.props);
+
   }
 
   render() {
@@ -62,6 +63,7 @@ const mapStateToProps = state => ({
   colunaF: state.montarTabuleiro.colunaF,
   colunaG: state.montarTabuleiro.colunaG,
   colunaH: state.montarTabuleiro.colunaH
+  // tabuleiro: state.montarTabuleiro.tabuleiro
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ montarTabuleiro }, dispatch);

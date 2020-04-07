@@ -28,17 +28,43 @@ export default (state = INITIAL_STATE, action) => {
       case 'MOVER_PECA':
         console.log("mover peça");
         console.log("-----------");
-        //encontar a Coluna "B";
-        //ir na posicao "3"
-        //setar o valor sendo a PecaSelecionada
-        console.log(action.payload);
-        console.log("-----------");
+        console.log("peca a ser movida: ");
+        console.log(action.payload.peca);
+        console.log("da cor " + action.payload.cor);
+        console.log("para a coluna: " + action.payload.coluna);
+        console.log("e linha: " + action.payload.linha);
+        console.log("origem: " + action.payload.casaOrigem);
+
+
+        let novaColuna;
+        if (action.payload.coluna == "B") {
+          novaColuna = movePiece(action.payload.casaOrigem,
+            state.colunaB, 
+            action.payload.peca, 
+            action.payload.linha, 
+            action.payload.cor);
+        }
+
+        console.log("novaColuna");
+        console.log(novaColuna);
 
         return {
           ...state,
-          colunaB: builderColumns.buildColumnB2(),
+          colunaB: novaColuna
+          // tabuleiro: tabuleiro
         }
     default:
       return state
   }
+}
+
+const movePiece = (casaOrigem, colunaCompleta, peca, linha, cor) => {
+  console.log("movendo peca!");
+  console.log(peca);
+  console.log(linha);
+  console.log(cor);
+  console.log("-|-|-|-|-");
+  
+  return builderColumns.movePieceToColumnB(casaOrigem, colunaCompleta, peca, linha, cor);
+  
 }

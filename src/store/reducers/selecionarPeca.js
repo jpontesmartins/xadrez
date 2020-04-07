@@ -10,7 +10,8 @@ export default (state = INITIAL_STATE, action) => {
         pecaSelecionada: action.payload.peca, 
         linha: action.payload.linha,
         coluna: action.payload.coluna,
-        cor: action.payload.cor
+        cor: action.payload.cor,
+        casaOrigem: action.payload.casaOrigem
       };
       return newState;
     default:

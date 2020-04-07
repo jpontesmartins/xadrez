@@ -44,7 +44,7 @@ const buildColumnB2 = () => {
   colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
   colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
   colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  
+
   colunas.set(3, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="3" />);
   colunas.set(2, <Casa coluna={nomeColuna} linha="2" />);
 
@@ -52,6 +52,36 @@ const buildColumnB2 = () => {
 
   return posicionarPecas(colunas);
 }
+
+const movePieceToColumnB = (casaOrigem, coluna, peca, linha, cor) => {
+  const nomeColuna = "B";
+  
+  const linhaOrigem = parseInt(casaOrigem.split("")[1]);
+  console.log("linhaOrigem: " + linhaOrigem);
+  
+  let linhas = new Map();
+  coluna.map((linhaProps, i) => {
+    if (linhaProps.props.peca){
+      const pecaa = 
+        <Peca peca={linhaProps.props.peca}
+              cor={linhaProps.props.cor}
+              linha={linhaProps.props.linha}></Peca>;
+
+        linhas.set(parseInt(linhaProps.props.linha), pecaa);
+    } else if (linhaProps.props.coluna) {
+      const casaVazia =  <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)}/>;
+      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+    }
+  });
+  const novaPosicaoDaPeca = <Peca peca={peca} cor={cor} linha={parseInt(linha)}></Peca>;
+  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+
+  const pecaVazia = <Casa coluna={nomeColuna} linha="5" />
+  linhas.set(linhaOrigem, pecaVazia);
+
+  return posicionarPecas(linhas);
+}
+
 
 
 const buildColumnC = () => {
@@ -151,16 +181,16 @@ const buildColumnH = () => {
   return posicionarPecas(colunas);
 }
 
-let posicionarPecas = colunas => {
+let posicionarPecas = linhas => {
   let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
+    linhas.get(8),
+    linhas.get(7),
+    linhas.get(6),
+    linhas.get(5),
+    linhas.get(4),
+    linhas.get(3),
+    linhas.get(2),
+    linhas.get(1)
   ];
   return posicoes;
 }
@@ -175,4 +205,5 @@ export default {
   buildColumnF,
   buildColumnG,
   buildColumnH,
+  movePieceToColumnB
 }

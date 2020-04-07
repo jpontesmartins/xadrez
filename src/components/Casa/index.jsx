@@ -43,13 +43,8 @@ class Casa extends Component {
   }
 
   handleClick() {
-    console.log(`Casa vazia: ${this.getCasa()}`);
-    console.log(this.props);
-    console.log(`Mover peca para cá: ${this.getCasa()}`);
-    console.log(this.props.pecaSelecionada);
-
-    const { pecaSelecionada, coluna, linha, corDaPeca, moverPeca } = this.props;
-    moverPeca(pecaSelecionada, linha, coluna, corDaPeca);
+    const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, moverPeca } = this.props;
+    moverPeca(casaOrigem, pecaSelecionada, linha, coluna, corDaPeca);
 
   }
 
@@ -63,7 +58,9 @@ class Casa extends Component {
 
 const mapStateToProps = state => ({
   pecaSelecionada: state.selecionarPeca.pecaSelecionada,
-  corDaPeca: state.selecionarPeca.cor
+  corDaPeca: state.selecionarPeca.cor,
+  tabuleiro: state.montarTabuleiro.tabuleiro,
+  casaOrigem: state.selecionarPeca.casaOrigem
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca }, dispatch);

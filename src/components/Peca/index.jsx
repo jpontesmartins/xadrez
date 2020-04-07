@@ -28,7 +28,7 @@ class Peca extends Component {
 
   handleClick() {
     const { cor, peca, linha, coluna, selecionarPeca } = this.props;
-    selecionarPeca(peca, linha, coluna, cor);
+    selecionarPeca(this.getCasa(), peca, linha, coluna, cor);
     console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
 
