@@ -15,6 +15,8 @@ class Peca extends Component {
   }
 
   getCasa() {
+    // console.log("getCasa");
+    // console.log(this.props);
     if (this.props) {
       if (this.props.linha && this.props.coluna) {
         return `${this.props.coluna}${this.props.linha}`;
@@ -24,6 +26,8 @@ class Peca extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log("PEca - prevProps");
+    // console.log(this.props)
   }
 
   handleClick() {

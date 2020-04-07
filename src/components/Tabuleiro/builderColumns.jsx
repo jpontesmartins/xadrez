@@ -55,28 +55,37 @@ const buildColumnB2 = () => {
 
 const movePieceToColumnB = (casaOrigem, coluna, peca, linha, cor) => {
   const nomeColuna = "B";
-  
+
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
   console.log("linhaOrigem: " + linhaOrigem);
-  
+
+  console.log(coluna);
   let linhas = new Map();
   coluna.map((linhaProps, i) => {
-    if (linhaProps.props.peca){
-      const pecaa = 
+    console.log | ("linhaProps");
+    console.log | (linhaProps);
+    if (linhaProps.props.peca) {
+      const pecaa =
         <Peca peca={linhaProps.props.peca}
-              cor={linhaProps.props.cor}
-              linha={linhaProps.props.linha}></Peca>;
+          cor={linhaProps.props.cor}
+          coluna={nomeColuna}
+          linha={linhaProps.props.linha}></Peca>;
 
-        linhas.set(parseInt(linhaProps.props.linha), pecaa);
+      linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else if (linhaProps.props.coluna) {
-      const casaVazia =  <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)}/>;
+      const casaVazia =
+        <Casa
+          coluna={nomeColuna} 
+          linha={parseInt(linhaProps.props.linha)} />;
       linhas.set(parseInt(linhaProps.props.linha), casaVazia);
     }
   });
-  const novaPosicaoDaPeca = <Peca peca={peca} cor={cor} linha={parseInt(linha)}></Peca>;
+  
+  const novaPosicaoDaPeca =
+    <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
   linhas.set(parseInt(linha), novaPosicaoDaPeca);
 
-  const pecaVazia = <Casa coluna={nomeColuna} linha="5" />
+  const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
   linhas.set(linhaOrigem, pecaVazia);
 
   return posicionarPecas(linhas);
