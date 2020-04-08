@@ -31,7 +31,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'MOVER_PECA':
       let allColumns = organizarPecas(state);
       const { coluna, linha, peca, cor, casaOrigem } = action.payload;
-
+      const destino = { peca, linha, cor };
       const colunaOrigem = casaOrigem.split("")[0];
       const colunaDestino = coluna;
       console.log(`Casa origem: ${casaOrigem}`);
@@ -40,14 +40,14 @@ export default (state = INITIAL_STATE, action) => {
       if (colunaOrigem === colunaDestino) {
         return {
           ...state,
-          colunaA: (colunaDestino == A ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaA),
-          colunaB: (colunaDestino == B ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaB),
-          colunaC: (colunaDestino == C ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaC),
-          colunaD: (colunaDestino == D ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaD),
-          colunaE: (colunaDestino == E ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaE),
-          colunaF: (colunaDestino == F ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaF),
-          colunaG: (colunaDestino == G ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaG),
-          colunaH: (colunaDestino == H ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaH),
+          colunaA: (colunaDestino == A ? movePiece(casaOrigem, state, destino) : state.colunaA),
+          colunaB: (colunaDestino == B ? movePiece(casaOrigem, state, destino) : state.colunaB),
+          colunaC: (colunaDestino == C ? movePiece(casaOrigem, state, destino) : state.colunaC),
+          colunaD: (colunaDestino == D ? movePiece(casaOrigem, state, destino) : state.colunaD),
+          colunaE: (colunaDestino == E ? movePiece(casaOrigem, state, destino) : state.colunaE),
+          colunaF: (colunaDestino == F ? movePiece(casaOrigem, state, destino) : state.colunaF),
+          colunaG: (colunaDestino == G ? movePiece(casaOrigem, state, destino) : state.colunaG),
+          colunaH: (colunaDestino == H ? movePiece(casaOrigem, state, destino) : state.colunaH),
         }
       } else {
 

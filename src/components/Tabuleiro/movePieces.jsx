@@ -30,7 +30,9 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
 
 }
 
-const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) => {
+const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, destino) => {
+  const { peca, linha, cor} = destino;
+
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
   const nomeColuna = casaOrigem.split("")[0];
 
