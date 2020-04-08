@@ -34,34 +34,15 @@ const buildColumnB = () => {
   return posicionarPecas(colunas);
 }
 
-const buildColumnB2 = () => {
-  //simulacao de movimento de peca... Peao branco sai da B2 para a B3
-  //lembrando que a casa da qual a peca saiou tem que ficar vaga..
-  const nomeColuna = "B";
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-
-  colunas.set(3, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Casa coluna={nomeColuna} linha="2" />);
-
-  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
-
-  return posicionarPecas(colunas);
-}
-
-const movePieceToColumn = (casaOrigem, coluna, peca, linha, cor) => {
+const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) => {
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
   const nomeColuna = casaOrigem.split("")[0];//"B";
   
   console.log("linhaOrigem: " + linhaOrigem);
-  console.log(coluna);
+  console.log(colunaCompleta);
 
   let linhas = new Map();
-  coluna.map((linhaProps, i) => {
+  colunaCompleta.map((linhaProps, i) => {
     console.log | ("linhaProps");
     console.log | (linhaProps);
     if (linhaProps.props.peca) {
@@ -207,12 +188,11 @@ let posicionarPecas = linhas => {
 export default {
   buildColumnA,
   buildColumnB,
-  buildColumnB2,
   buildColumnC,
   buildColumnD,
   buildColumnE,
   buildColumnF,
   buildColumnG,
   buildColumnH,
-  movePieceToColumnB: movePieceToColumn
+  movePieceToTheSameColumn
 }

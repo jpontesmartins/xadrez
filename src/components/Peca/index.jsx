@@ -23,7 +23,7 @@ class Peca extends Component {
     return 'vazio';
   }
 
-  componentDidUpdate(prevProps) {  }
+  componentDidUpdate(prevProps) { }
 
   handleClick() {
     const { cor, peca, linha, coluna, selecionarPeca } = this.props;
@@ -33,17 +33,21 @@ class Peca extends Component {
 
   render() {
     const { peca } = this.props;
-    let cor =  this.props.cor;
+    const SELECTED_PIECE = "blue"
 
-    if (this.props.linha === this.props.pecaSelecionada.linha &&
-      this.props.coluna === this.props.pecaSelecionada.coluna) {
-        cor = "blue";
-      }
-
+    let cor = this.props.cor;
+    if (this.pieceIsSelected()) {
+      cor = SELECTED_PIECE;
+    }
 
     return (
       <PecaComponent cor={cor} onClick={this.handleClick} simbolo={peca.simbolo} />
     );
+  }
+
+  pieceIsSelected() {
+    return this.props.linha === this.props.pecaSelecionada.linha &&
+      this.props.coluna === this.props.pecaSelecionada.coluna;
   }
 }
 
