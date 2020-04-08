@@ -47,27 +47,27 @@ export default (state = INITIAL_STATE, action) => {
       if (colunaOrigem === colunaDestino) {
         return {
           ...state,
-          colunaA: (colunaDestino == "A" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaA),
-          colunaB: (colunaDestino == "B" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaB),
-          colunaC: (colunaDestino == "C" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaC),
-          colunaD: (colunaDestino == "D" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaD),
-          colunaE: (colunaDestino == "E" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaE),
-          colunaF: (colunaDestino == "F" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaF),
-          colunaG: (colunaDestino == "G" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaG),
-          colunaH: (colunaDestino == "H" ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaH),
+          colunaA: (colunaDestino == A ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaA),
+          colunaB: (colunaDestino == B ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaB),
+          colunaC: (colunaDestino == C ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaC),
+          colunaD: (colunaDestino == D ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaD),
+          colunaE: (colunaDestino == E ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaE),
+          colunaF: (colunaDestino == F ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaF),
+          colunaG: (colunaDestino == G ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaG),
+          colunaH: (colunaDestino == H ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaH),
         }
       } else {
 
         return {
           ...state,
-          colunaA: movimentacaoA(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaB: movimentacaoB(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaC: movimentacaoC(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaD: movimentacaoD(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaE: movimentacaoE(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaF: movimentacaoF(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaG: movimentacaoG(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
-          colunaH: movimentacaoH(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state),
+          colunaA: movimentacao(A, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaB: movimentacao(B, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaC: movimentacao(C, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaD: movimentacao(D, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaE: movimentacao(E, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaF: movimentacao(F, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaG: movimentacao(G, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaH: movimentacao(H, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
 
         }
       }
@@ -90,130 +90,39 @@ const movePiece = (casaOrigem, colunaCompleta, peca, linha, cor) => {
 
 }
 
-function movimentacaoA(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
+
+function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor) {
+
+  if (colunaAtual == "A") {
+  console.log("Movimentacao");
+  console.log("colunaAtual:" + colunaAtual);
+  console.log("colunaDestino: " + colunaDestino);
+  console.log("casaOrigem: " + casaOrigem);
+  console.log("coluna: " + coluna);
+  console.log(allColumns);
+  console.log(peca);
+  console.log(linha);
+  console.log(cor);
+  }
+
+  const destinoCompleto = {
+    peca: peca,
+    cor: cor,
+    coluna: colunaDestino,
+    linha: linha
+  }
+
   const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "A") {
+  if (colunaOrigem == colunaAtual) {
     let colunaZerada = allColumns.get(colunaOrigem);
     colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
     return colunaZerada;
   }
   
-  if (colunaDestino == "A") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor, state);
+  if (colunaDestino == colunaAtual) {
+    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor);
   } else {
-    return state.colunaA;
-  }
-}
-
-function movimentacaoB(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "B") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "B") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaB
-  }
-
-}
-
-function movimentacaoC(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "C") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "C") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaC
-  }
-}
-
-
-function movimentacaoD(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "D") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "D") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaD
-  }
-}
-
-function movimentacaoE(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "E") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "E") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaE
-  }
-}
-
-function movimentacaoF(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "F") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "F") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaF
-  }
-}
-
-function movimentacaoG(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "G") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "G") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaG
-  }
-}
-
-function movimentacaoH(colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor, state) {
-
-  const colunaOrigem = casaOrigem.split("")[0];
-  if (colunaOrigem == "H") {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
-  }
-
-  if (colunaDestino == "H") {
-    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor)
-  } else {
-    return state.colunaH
+    return allColumns.get(colunaAtual);
   }
 }
 

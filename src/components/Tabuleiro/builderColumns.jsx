@@ -36,11 +36,8 @@ const buildColumnB = () => {
 
 
 const vaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
-  console.log("esvaziar: " + casaOrigem);
   const nomeColuna = casaOrigem.split("")[0];
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
-  console.log(allColumns.get(nomeColuna));
-  //duplicando para retornar...
   const novaColuna = new Map();
   allColumns.get(nomeColuna).map((linhaProps, i) => {
     if (linhaProps.props.peca) {
@@ -59,8 +56,6 @@ const vaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
 
   const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
   novaColuna.set(linhaOrigem, pecaVazia);
-  console.log("novaColuna");
-  console.log(novaColuna);
 
   return posicionarPecas(novaColuna);
 
@@ -75,8 +70,6 @@ const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) 
 
   let linhas = new Map();
   colunaCompleta.map((linhaProps, i) => {
-    // console.log | ("linhaProps");
-    // console.log | (linhaProps);
     if (linhaProps.props.peca) {
       const pecaa =
         <Peca peca={linhaProps.props.peca}
@@ -105,20 +98,19 @@ const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) 
 }
 
 const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, linha, cor) => {
-  console.log("movePieceToAnotherColumn");
-  console.log("casa origem: " + casaOrigem);
-  console.log(colunaCompleta);
-  console.log("peca: " + peca);
-  console.log("linha da peca: " + linha);
-  console.log("coluna destino: " + nomeColuna);
-  console.log("cor da peca: " + cor);
+  // console.log("movePieceToAnotherColumn");
+  // console.log("casa origem: " + casaOrigem);
+  // console.log(colunaCompleta);
+  // console.log("peca: " + peca);
+  // console.log("linha da peca: " + linha);
+  // console.log("coluna destino: " + nomeColuna);
+  // console.log("cor da peca: " + cor);
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
 
   let linhas = new Map();
   colunaCompleta.map((linhaProps, i) => {
 
     if (linhaProps.props.peca) {
-      // console.log(linhaProps.props);
       const pecaa = <Peca peca={linhaProps.props.peca}
         cor={linhaProps.props.cor}
         coluna={nomeColuna}
@@ -126,7 +118,6 @@ const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, 
 
       linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
-      // console.log(linhaProps.props);
       const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
       linhas.set(parseInt(linhaProps.props.linha), casaVazia);
 
@@ -137,13 +128,7 @@ const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, 
     <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
   linhas.set(parseInt(linha), novaPosicaoDaPeca);
 
-  // const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
-  // linhas.set(linhaOrigem, pecaVazia);
-
-  console.log(linhas);
-
   return posicionarPecas(linhas);
-  // return "";
 }
 
 
