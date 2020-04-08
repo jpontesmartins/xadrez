@@ -53,14 +53,14 @@ export default (state = INITIAL_STATE, action) => {
 
         return {
           ...state,
-          colunaA: movimentacao(A, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaB: movimentacao(B, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaC: movimentacao(C, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaD: movimentacao(D, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaE: movimentacao(E, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaF: movimentacao(F, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaG: movimentacao(G, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
-          colunaH: movimentacao(H, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor),
+          colunaA: movimentacao(A, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaB: movimentacao(B, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaC: movimentacao(C, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaD: movimentacao(D, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaE: movimentacao(E, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaF: movimentacao(F, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaG: movimentacao(G, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaH: movimentacao(H, colunaDestino, casaOrigem, coluna, allColumns, destino),
 
         }
       }
@@ -85,7 +85,8 @@ const movePiece = (casaOrigem, state, peca, linha, cor) => {
   return movePieces.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
 }
 
-function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor) {
+function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, destino) {
+  const { peca, linha, cor } = destino
 
   if (colunaAtual == "A") {
     console.log("Movimentacao");
@@ -97,13 +98,6 @@ function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns
     console.log(peca);
     console.log(linha);
     console.log(cor);
-  }
-
-  const destinoCompleto = {
-    peca: peca,
-    cor: cor,
-    coluna: colunaDestino,
-    linha: linha
   }
 
   const colunaOrigem = casaOrigem.split("")[0];
