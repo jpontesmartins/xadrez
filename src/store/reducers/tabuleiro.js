@@ -1,6 +1,7 @@
 import builderColumns from '../../components/Tabuleiro/builderColumns';
 import movePieces from '../../components/Tabuleiro/movePieces';
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
+import { organizarPecas } from "../../components/Tabuleiro/columns";
 
 const INITIAL_STATE = {
   colunaA: "",
@@ -28,16 +29,7 @@ export default (state = INITIAL_STATE, action) => {
         colunaH: builderColumns.buildColumnH()
       }
     case 'MOVER_PECA':
-      let allColumns = new Map();
-      allColumns.set(A, state.colunaA);
-      allColumns.set(B, state.colunaB);
-      allColumns.set(C, state.colunaC);
-      allColumns.set(D, state.colunaD);
-      allColumns.set(E, state.colunaE);
-      allColumns.set(F, state.colunaF);
-      allColumns.set(G, state.colunaG);
-      allColumns.set(H, state.colunaH);
-
+      let allColumns = organizarPecas(state);
       const { coluna, linha, peca, cor, casaOrigem } = action.payload;
 
       const colunaOrigem = casaOrigem.split("")[0];
@@ -48,14 +40,14 @@ export default (state = INITIAL_STATE, action) => {
       if (colunaOrigem === colunaDestino) {
         return {
           ...state,
-          colunaA: (colunaDestino == A ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaA),
-          colunaB: (colunaDestino == B ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaB),
-          colunaC: (colunaDestino == C ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaC),
-          colunaD: (colunaDestino == D ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaD),
-          colunaE: (colunaDestino == E ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaE),
-          colunaF: (colunaDestino == F ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaF),
-          colunaG: (colunaDestino == G ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaG),
-          colunaH: (colunaDestino == H ? movePiece(casaOrigem, allColumns.get(coluna), peca, linha, cor) : state.colunaH),
+          colunaA: (colunaDestino == A ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaA),
+          colunaB: (colunaDestino == B ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaB),
+          colunaC: (colunaDestino == C ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaC),
+          colunaD: (colunaDestino == D ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaD),
+          colunaE: (colunaDestino == E ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaE),
+          colunaF: (colunaDestino == F ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaF),
+          colunaG: (colunaDestino == G ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaG),
+          colunaH: (colunaDestino == H ? movePiece(casaOrigem, state, peca, linha, cor) : state.colunaH),
         }
       } else {
 
@@ -86,7 +78,10 @@ const movePieceToAnotherColumn = (casaOrigem, coluna, colunaCompleta, peca, linh
   return movePieces.movePieceToAnotherColumn(casaOrigem, coluna, colunaCompleta, peca, linha, cor);
 }
 
-const movePiece = (casaOrigem, colunaCompleta, peca, linha, cor) => {
+const movePiece = (casaOrigem, state, peca, linha, cor) => {
+  const colunaOrigem = casaOrigem.split("")[0];
+  const colunaCompleta = organizarPecas(state).get(colunaOrigem);
+
   return movePieces.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
 }
 
