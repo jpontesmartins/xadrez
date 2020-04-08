@@ -23,6 +23,11 @@ class Peca extends Component {
     return 'vazio';
   }
 
+  pieceIsSelected() {
+    return this.props.linha === this.props.pecaSelecionada.linha &&
+      this.props.coluna === this.props.pecaSelecionada.coluna;
+  }
+
   componentDidUpdate(prevProps) { }
 
   handleClick() {
@@ -45,10 +50,6 @@ class Peca extends Component {
     );
   }
 
-  pieceIsSelected() {
-    return this.props.linha === this.props.pecaSelecionada.linha &&
-      this.props.coluna === this.props.pecaSelecionada.coluna;
-  }
 }
 
 const mapStateToProps = state => ({
