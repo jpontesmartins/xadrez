@@ -4,7 +4,7 @@ import Casa from '../Casa';
 import Peca from '../Peca';
 import { TORRE, PEAO, CAVALO, BISPO, DAMA, REI } from '../constants';
 
-const vaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
+const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
   const nomeColuna = casaOrigem.split("")[0];
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
   const novaColuna = new Map();
@@ -32,7 +32,7 @@ const vaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
 
 const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) => {
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
-  const nomeColuna = casaOrigem.split("")[0];//"B";
+  const nomeColuna = casaOrigem.split("")[0];
 
   console.log("linhaOrigem: " + linhaOrigem);
   console.log(colunaCompleta);
@@ -67,23 +67,12 @@ const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, peca, linha, cor) 
 }
 
 const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, linha, cor) => {
-  // console.log("movePieceToAnotherColumn");
-  // console.log("casa origem: " + casaOrigem);
-  // console.log(colunaCompleta);
-  // console.log("peca: " + peca);
-  // console.log("linha da peca: " + linha);
-  // console.log("coluna destino: " + nomeColuna);
-  // console.log("cor da peca: " + cor);
-  const linhaOrigem = parseInt(casaOrigem.split("")[1]);
 
   let linhas = new Map();
-  colunaCompleta.map((linhaProps, i) => {
+  colunaCompleta.map((linhaProps) => {
 
     if (linhaProps.props.peca) {
-      const pecaa = <Peca peca={linhaProps.props.peca}
-        cor={linhaProps.props.cor}
-        coluna={nomeColuna}
-        linha={linhaProps.props.linha}></Peca>;
+      const pecaa = buildPiece(linhaProps, nomeColuna);
 
       linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
@@ -119,5 +108,12 @@ let posicionarPecas = linhas => {
 export default {
   movePieceToTheSameColumn,
   movePieceToAnotherColumn,
-  vaziaCasaDaPecaMovimentada
+  esvaziaCasaDaPecaMovimentada
+}
+
+function buildPiece(linhaProps, nomeColuna) {
+  return <Peca peca={linhaProps.props.peca} 
+    cor={linhaProps.props.cor} coluna={nomeColuna} 
+    linha={linhaProps.props.linha}>
+    </Peca>;
 }

@@ -79,7 +79,7 @@ export default (state = INITIAL_STATE, action) => {
 
 
 const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
-  return movePieces.vaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
+  return movePieces.esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
 }
 
 const movePieceToAnotherColumn = (casaOrigem, coluna, colunaCompleta, peca, linha, cor) => {
@@ -88,7 +88,6 @@ const movePieceToAnotherColumn = (casaOrigem, coluna, colunaCompleta, peca, linh
 
 const movePiece = (casaOrigem, colunaCompleta, peca, linha, cor) => {
   return movePieces.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
-
 }
 
 function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor) {
