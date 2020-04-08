@@ -1,4 +1,5 @@
 import builderColumns from '../../components/Tabuleiro/builderColumns';
+import movePieces from '../../components/Tabuleiro/movePieces';
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
 
 const INITIAL_STATE = {
@@ -78,31 +79,30 @@ export default (state = INITIAL_STATE, action) => {
 
 
 const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
- return builderColumns.vaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
+  return movePieces.vaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
 }
 
 const movePieceToAnotherColumn = (casaOrigem, coluna, colunaCompleta, peca, linha, cor) => {
-  return builderColumns.movePieceToAnotherColumn(casaOrigem, coluna, colunaCompleta, peca, linha, cor);
+  return movePieces.movePieceToAnotherColumn(casaOrigem, coluna, colunaCompleta, peca, linha, cor);
 }
 
 const movePiece = (casaOrigem, colunaCompleta, peca, linha, cor) => {
-  return builderColumns.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
+  return movePieces.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
 
 }
-
 
 function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, peca, linha, cor) {
 
   if (colunaAtual == "A") {
-  console.log("Movimentacao");
-  console.log("colunaAtual:" + colunaAtual);
-  console.log("colunaDestino: " + colunaDestino);
-  console.log("casaOrigem: " + casaOrigem);
-  console.log("coluna: " + coluna);
-  console.log(allColumns);
-  console.log(peca);
-  console.log(linha);
-  console.log(cor);
+    console.log("Movimentacao");
+    console.log("colunaAtual:" + colunaAtual);
+    console.log("colunaDestino: " + colunaDestino);
+    console.log("casaOrigem: " + casaOrigem);
+    console.log("coluna: " + coluna);
+    console.log(allColumns);
+    console.log(peca);
+    console.log(linha);
+    console.log(cor);
   }
 
   const destinoCompleto = {
@@ -118,7 +118,7 @@ function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns
     colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
     return colunaZerada;
   }
-  
+
   if (colunaDestino == colunaAtual) {
     return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor);
   } else {
