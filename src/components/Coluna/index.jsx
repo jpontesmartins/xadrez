@@ -6,7 +6,7 @@ class Coluna extends Component {
     super(props);
   }
 
-  componentDidUpdate(prevProps) { }
+  componentDidUpdate(prevProps) {   }
 
   render() {
     const { tipoDeColuna, pecas } = this.props;
@@ -26,7 +26,8 @@ class Coluna extends Component {
 }
 
 const mapStateToProps = state => ({
-  pecaSelecionada: state.selecionarPeca
+  pecaSelecionada: state.pecas,
+  tabuleiro: state.tabuleiro.tabuleiro
 });
 
 export default connect(mapStateToProps)(Coluna);

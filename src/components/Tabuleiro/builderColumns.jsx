@@ -132,16 +132,16 @@ const buildColumnH = () => {
   return posicionarPecas(colunas);
 }
 
-let posicionarPecas = colunas => {
+let posicionarPecas = linhas => {
   let posicoes = [
-    colunas.get(8),
-    colunas.get(7),
-    colunas.get(6),
-    colunas.get(5),
-    colunas.get(4),
-    colunas.get(3),
-    colunas.get(2),
-    colunas.get(1)
+    linhas.get(8),
+    linhas.get(7),
+    linhas.get(6),
+    linhas.get(5),
+    linhas.get(4),
+    linhas.get(3),
+    linhas.get(2),
+    linhas.get(1)
   ];
   return posicoes;
 }
@@ -154,5 +154,5 @@ export default {
   buildColumnE,
   buildColumnF,
   buildColumnG,
-  buildColumnH,
+  buildColumnH
 }
