@@ -29,9 +29,8 @@ export default (state = INITIAL_STATE, action) => {
         colunaH: builderColumns.buildColumnH()
       }
     case 'MOVER_PECA':
-      let allColumns = organizarPecas(state);
       const { coluna, linha, peca, cor, casaOrigem } = action.payload;
-      const destino = { peca, linha, cor };
+      const destino = { peca, linha, cor, coluna };
       const colunaOrigem = casaOrigem.split("")[0];
       const colunaDestino = coluna;
       console.log(`Casa origem: ${casaOrigem}`);
@@ -40,27 +39,27 @@ export default (state = INITIAL_STATE, action) => {
       if (colunaOrigem === colunaDestino) {
         return {
           ...state,
-          colunaA: (colunaDestino == A ? movePiece(casaOrigem, state, destino) : state.colunaA),
-          colunaB: (colunaDestino == B ? movePiece(casaOrigem, state, destino) : state.colunaB),
-          colunaC: (colunaDestino == C ? movePiece(casaOrigem, state, destino) : state.colunaC),
-          colunaD: (colunaDestino == D ? movePiece(casaOrigem, state, destino) : state.colunaD),
-          colunaE: (colunaDestino == E ? movePiece(casaOrigem, state, destino) : state.colunaE),
-          colunaF: (colunaDestino == F ? movePiece(casaOrigem, state, destino) : state.colunaF),
-          colunaG: (colunaDestino == G ? movePiece(casaOrigem, state, destino) : state.colunaG),
-          colunaH: (colunaDestino == H ? movePiece(casaOrigem, state, destino) : state.colunaH),
+          colunaA: move(A, casaOrigem, state, destino),
+          colunaB: move(B, casaOrigem, state, destino),
+          colunaC: move(C, casaOrigem, state, destino),
+          colunaD: move(D, casaOrigem, state, destino),
+          colunaE: move(E, casaOrigem, state, destino),
+          colunaF: move(F, casaOrigem, state, destino),
+          colunaG: move(G, casaOrigem, state, destino),
+          colunaH: move(H, casaOrigem, state, destino),
         }
       } else {
 
         return {
           ...state,
-          colunaA: movimentacao(A, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaB: movimentacao(B, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaC: movimentacao(C, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaD: movimentacao(D, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaE: movimentacao(E, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaF: movimentacao(F, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaG: movimentacao(G, colunaDestino, casaOrigem, coluna, allColumns, destino),
-          colunaH: movimentacao(H, colunaDestino, casaOrigem, coluna, allColumns, destino),
+          colunaA: movimentacao(A, casaOrigem, state, destino),
+          colunaB: movimentacao(B, casaOrigem, state, destino),
+          colunaC: movimentacao(C, casaOrigem, state, destino),
+          colunaD: movimentacao(D, casaOrigem, state, destino),
+          colunaE: movimentacao(E, casaOrigem, state, destino),
+          colunaF: movimentacao(F, casaOrigem, state, destino),
+          colunaG: movimentacao(G, casaOrigem, state, destino),
+          colunaH: movimentacao(H, casaOrigem, state, destino),
 
         }
       }
@@ -68,7 +67,6 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
-
 
 const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
   return movePieces.esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
@@ -78,40 +76,33 @@ const movePieceToAnotherColumn = (casaOrigem, coluna, colunaCompleta, peca, linh
   return movePieces.movePieceToAnotherColumn(casaOrigem, coluna, colunaCompleta, peca, linha, cor);
 }
 
-const movePiece = (casaOrigem, state, peca, linha, cor) => {
-  const colunaOrigem = casaOrigem.split("")[0];
-  const colunaCompleta = organizarPecas(state).get(colunaOrigem);
+function move(colunaAtual, casaOrigem, state, destino) {
+  const { coluna } = destino;
+  const colunaDestino = coluna;
+  const allColumns = organizarPecas(state);
 
-  return movePieces.movePieceToTheSameColumn(casaOrigem, colunaCompleta, peca, linha, cor);
+  if (colunaDestino == colunaAtual) {
+    const colunaOrigem = casaOrigem.split("")[0];
+    return movePieces.movePieceToTheSameColumn(casaOrigem, allColumns.get(colunaOrigem), destino);
+  } else {
+    return allColumns.get(colunaAtual);
+  }
+
 }
 
-function movimentacao(colunaAtual, colunaDestino, casaOrigem, coluna, allColumns, destino) {
-  const { peca, linha, cor } = destino
-
-  if (colunaAtual == "A") {
-    console.log("Movimentacao");
-    console.log("colunaAtual:" + colunaAtual);
-    console.log("colunaDestino: " + colunaDestino);
-    console.log("casaOrigem: " + casaOrigem);
-    console.log("coluna: " + coluna);
-    console.log(allColumns);
-    console.log(peca);
-    console.log(linha);
-    console.log(cor);
-  }
+function movimentacao(colunaAtual, casaOrigem, state, destino) {
+  const { peca, linha, cor, coluna } = destino
+  const allColumns = organizarPecas(state);
 
   const colunaOrigem = casaOrigem.split("")[0];
   if (colunaOrigem == colunaAtual) {
-    let colunaZerada = allColumns.get(colunaOrigem);
-    colunaZerada = esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
-    return colunaZerada;
+    return esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
   }
 
-  if (colunaDestino == colunaAtual) {
+  if (coluna == colunaAtual) {
     return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor);
   } else {
     return allColumns.get(colunaAtual);
   }
 }
-
 
