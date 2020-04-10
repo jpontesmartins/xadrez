@@ -29,10 +29,31 @@ export default (state = INITIAL_STATE, action) => {
         colunaH: builderColumns.buildColumnH()
       }
     case 'MOVER_PECA':
-      const { coluna, linha, peca, cor, casaOrigem } = action.payload;
-      const destino = { peca, linha, cor, coluna };
+      let { coluna, linha, peca, cor, casaOrigem } = action.payload;
+      let destino = { peca, linha, cor, coluna };
       console.log(`Casa origem: ${casaOrigem}`);
       console.log(`Casa destino: ${coluna}${linha}`);
+
+      return moveAll(casaOrigem, state, destino);
+    case 'CAPTURAR_PECA':
+      console.log('CAPTURAR_PECA');
+      coluna = action.payload.coluna;
+      linha = action.payload.linha;
+      peca = action.payload.peca;
+      cor = action.payload.cor
+      casaOrigem = action.payload.casaOrigem;
+      destino = { peca, linha, cor, coluna };
+
+      console.log(action.payload);
+      console.log("peca de ataque");
+      console.log(action.payload.pecaDeAtaque);
+      console.log("peca capturada:");
+      console.log(action.payload.peca);
+      console.log(action.payload.cor);
+      console.log("na coluna: " + action.payload.coluna);
+      console.log("e linha: " + action.payload.linha);
+
+
 
       return moveAll(casaOrigem, state, destino);
     default:
@@ -43,11 +64,7 @@ export default (state = INITIAL_STATE, action) => {
 const moveAll = (casaOrigem, state, destino) => {
   const colunaOrigem = casaOrigem.split("")[0];
   const colunaDestino = destino.coluna;
-  const { coluna, linha } = destino.coluna;
 
-  console.log(`Casa origem: ${casaOrigem}`);
-  console.log(`Casa destino: ${coluna}${linha}`);
-  
   if (colunaOrigem === colunaDestino) {
     return {
       ...state,
