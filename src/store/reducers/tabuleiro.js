@@ -17,26 +17,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'MONTAR_TABULEIRO':
-      return {
-        ...state,
-        colunaA: builderColumns.buildColumnA(),
-        colunaB: builderColumns.buildColumnB(),
-        colunaC: builderColumns.buildColumnC(),
-        colunaD: builderColumns.buildColumnD(),
-        colunaE: builderColumns.buildColumnE(),
-        colunaF: builderColumns.buildColumnF(),
-        colunaG: builderColumns.buildColumnG(),
-        colunaH: builderColumns.buildColumnH()
-      }
+      return montaTabuleiroInicial(state)
     case 'MOVER_PECA':
-      let { coluna, linha, peca, cor, casaOrigem } = action.payload;
-      let destino = { peca, linha, cor, coluna };
-      console.log(`Casa origem: ${casaOrigem}`);
-      console.log(`Casa destino: ${coluna}${linha}`);
-
-      return moveAll(casaOrigem, state, destino);
+      return moveAll(action.payload, state);
     case 'CAPTURAR_PECA':
-      return capturePiece(action.payload, state);
+      return captureAll(action.payload, state);
     default:
       return state
   }
@@ -63,19 +48,30 @@ const capturePiece = (payload, state) => {
   console.log("origemAtaque");
   console.log(origemAtaque);
 
-  return {
-    ...state,
-    colunaA: capture(A, origemAtaque, state, destino),
-    colunaB: capture(B, origemAtaque, state, destino),
-    colunaC: capture(C, origemAtaque, state, destino),
-    colunaD: capture(D, origemAtaque, state, destino),
-    colunaE: capture(E, origemAtaque, state, destino),
-    colunaF: capture(F, origemAtaque, state, destino),
-    colunaG: capture(G, origemAtaque, state, destino),
-    colunaH: capture(H, origemAtaque, state, destino),
-  }
-}
+  const colunaDestino = destino.coluna;
+  const colunaOrigem = origemAtaque.coluna;
+  console.log("captureAll");
+  console.log(colunaDestino);
+  console.log(colunaOrigem);
 
+  if (colunaOrigem == colunaDestino) {
+    return {
+      ...state,
+      colunaA: capture(A, origemAtaque, state, destino),
+      colunaB: capture(B, origemAtaque, state, destino),
+      colunaC: capture(C, origemAtaque, state, destino),
+      colunaD: capture(D, origemAtaque, state, destino),
+      colunaE: capture(E, origemAtaque, state, destino),
+      colunaF: capture(F, origemAtaque, state, destino),
+      colunaG: capture(G, origemAtaque, state, destino),
+      colunaH: capture(H, origemAtaque, state, destino),
+    }
+  } else {
+    const casaOrigem = origemAtaque.coluna + "" + origemAtaque.linha;
+    return moveAll(casaOrigem, state, destino);
+  }
+
+}
 
 const capture = (colunaAtual, origemAtaque, state, destino) => {
   const colunaDestino = destino.coluna;
@@ -84,13 +80,25 @@ const capture = (colunaAtual, origemAtaque, state, destino) => {
     return movePieces.capturaPeca(origemAtaque, allColumns.get(destino.coluna), destino);
   } else {
     const casaDaCaptura = destino.coluna + "" + destino.linha;
-    console.log("move");
-    console.log(casaDaCaptura);
     return move(colunaAtual, casaDaCaptura, state, destino);
   }
 }
 
-const moveAll = (casaOrigem, state, destino) => {
+const captureAll = (payload, state) => {
+  return capturePiece(payload, state);
+}
+
+
+
+
+
+const moveAll = (payload, state) => {
+  const { coluna, linha, peca, cor, casaOrigem } = payload;
+  const destino = { peca, linha, cor, coluna };
+
+  console.log(`Casa origem: ${casaOrigem}`);
+  console.log(`Casa destino: ${destino.coluna}${destino.linha}`);
+
   const colunaOrigem = casaOrigem.split("")[0];
   const colunaDestino = destino.coluna;
 
@@ -122,6 +130,7 @@ const moveAll = (casaOrigem, state, destino) => {
 
 }
 
+
 function move(colunaAtual, casaOrigem, state, destino) {
   const { coluna } = destino;
   const colunaDestino = coluna;
@@ -152,3 +161,20 @@ function movimentacao(colunaAtual, casaOrigem, state, destino) {
   }
 }
 
+
+
+
+
+function montaTabuleiroInicial(state) {
+  return {
+    ...state,
+    colunaA: builderColumns.buildColumnA(),
+    colunaB: builderColumns.buildColumnB(),
+    colunaC: builderColumns.buildColumnC(),
+    colunaD: builderColumns.buildColumnD(),
+    colunaE: builderColumns.buildColumnE(),
+    colunaF: builderColumns.buildColumnF(),
+    colunaG: builderColumns.buildColumnG(),
+    colunaH: builderColumns.buildColumnH()
+  };
+}
