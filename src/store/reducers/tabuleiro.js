@@ -36,28 +36,57 @@ export default (state = INITIAL_STATE, action) => {
 
       return moveAll(casaOrigem, state, destino);
     case 'CAPTURAR_PECA':
-      console.log('CAPTURAR_PECA');
-      coluna = action.payload.coluna;
-      linha = action.payload.linha;
-      peca = action.payload.peca;
-      cor = action.payload.cor
-      casaOrigem = action.payload.casaOrigem;
-      destino = { peca, linha, cor, coluna };
-
-      console.log(action.payload);
-      console.log("peca de ataque");
-      console.log(action.payload.pecaDeAtaque);
-      console.log("peca capturada:");
-      console.log(action.payload.peca);
-      console.log(action.payload.cor);
-      console.log("na coluna: " + action.payload.coluna);
-      console.log("e linha: " + action.payload.linha);
-
-
-
-      return moveAll(casaOrigem, state, destino);
+      return capturePiece(action.payload, state);
     default:
       return state
+  }
+}
+
+const capturePiece = (payload, state) => {
+  const casaDaCaptura = payload.casaDaCaptura;
+  const pecaDeAtaque = payload.pecaDeAtaque;
+  const peca = payload.peca;
+  const linha = payload.linha;
+  const coluna = payload.coluna;
+  const cor = payload.cor;
+  const origemAtaque = payload.pecaOrigemAtaque
+
+  const destino = { peca, linha, cor, coluna };
+
+  console.log("CAPTURAA");
+  console.log(peca)  //peao
+  console.log(linha)  //7
+  console.log(coluna)  //A
+  console.log(cor)  //preta
+  console.log(casaDaCaptura) //A7
+  console.log(pecaDeAtaque) //peao, branco
+  console.log("origemAtaque");
+  console.log(origemAtaque);
+
+  return {
+    ...state,
+    colunaA: capture(A, origemAtaque, state, destino),
+    colunaB: capture(B, origemAtaque, state, destino),
+    colunaC: capture(C, origemAtaque, state, destino),
+    colunaD: capture(D, origemAtaque, state, destino),
+    colunaE: capture(E, origemAtaque, state, destino),
+    colunaF: capture(F, origemAtaque, state, destino),
+    colunaG: capture(G, origemAtaque, state, destino),
+    colunaH: capture(H, origemAtaque, state, destino),
+  }
+}
+
+
+const capture = (colunaAtual, origemAtaque, state, destino) => {
+  const colunaDestino = destino.coluna;
+  if (colunaAtual == colunaDestino) {
+    const allColumns = organizarPecas(state);
+    return movePieces.capturaPeca(origemAtaque, allColumns.get(destino.coluna), destino);
+  } else {
+    const casaDaCaptura = destino.coluna + "" + destino.linha;
+    console.log("move");
+    console.log(casaDaCaptura);
+    return move(colunaAtual, casaDaCaptura, state, destino);
   }
 }
 

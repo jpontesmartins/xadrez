@@ -21,7 +21,7 @@ export const selecionarPeca = (casaOrigem, peca, linha, coluna, cor, aguardandoS
   }
 });
 
-export const capturarPeca = (casaDaCaptura, peca, linha, coluna, cor, pecaDeAtaque) => ({
+export const capturarPeca = (casaDaCaptura, peca, linha, coluna, cor, pecaDeAtaque, pecaOrigemAtaque) => ({
   type: 'CAPTURAR_PECA',
   payload: {
     casaDaCaptura,
@@ -29,7 +29,8 @@ export const capturarPeca = (casaDaCaptura, peca, linha, coluna, cor, pecaDeAtaq
     linha,
     coluna,
     cor,
-    pecaDeAtaque
+    pecaDeAtaque,
+    pecaOrigemAtaque
   }
 });
 

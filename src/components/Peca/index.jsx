@@ -32,25 +32,17 @@ class Peca extends Component {
 
   handleClick() {
     const { cor, peca, linha, coluna, aguardandoSegundoClick,
-      pecaDeAtaque, selecionarPeca, capturarPeca } = this.props;
-    //já existe uma peça selecionada?
-    //
-    console.log(`cor: ${cor}`);
-    console.log(peca);
-    console.log(`linha: ${linha}`);
-    console.log(`coluna: ${coluna}`);
-    console.log(`selecionarPeca: ${selecionarPeca}`);
+      pecaDeAtaque, selecionarPeca, capturarPeca, pecaSelecionada } = this.props;
 
-    if (aguardandoSegundoClick) {
-      console.log("CAPTURARRRRRR!");
-      console.log(pecaDeAtaque);
-      capturarPeca(this.getCasa(), peca, linha, coluna, cor, pecaDeAtaque);
+    if (aguardandoSegundoClick && pecaDeAtaque.cor !== cor) {
+      console.log("Captura de Peca");
+      const pecaOrigemAtaque = pecaSelecionada;
+      capturarPeca(this.getCasa(), peca, linha, coluna, cor, pecaDeAtaque, pecaOrigemAtaque);
     } else {
       selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
 
     }
     console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
-    console.log(this.state);
   }
 
   render() {
