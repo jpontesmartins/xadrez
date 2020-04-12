@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-import { moverPeca } from '../../store/actions';
+import { moverPeca, limpar } from '../../store/actions';
 import { BRANCA, PRETA } from '../constants';
 
 import './styles.css';
@@ -43,9 +43,18 @@ class Casa extends Component {
   }
 
   handleClick() {
-    const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, moverPeca } = this.props;
+    const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, moverPeca, limpar, aguardandoSegundoClick } = this.props;
     moverPeca(casaOrigem, pecaSelecionada, linha, coluna, corDaPeca);
+    limpar();
+    console.log("Casa handleClick()");
+    // console.log(this.props);
+    console.log("Casa handleClick()");
 
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps);
+    console.log(this.props);
   }
 
   render() {
@@ -60,9 +69,10 @@ const mapStateToProps = state => ({
   pecaSelecionada: state.pecas.pecaSelecionada,
   corDaPeca: state.pecas.cor,
   casaOrigem: state.pecas.casaOrigem,
-  tabuleiro: state.tabuleiro.tabuleiro
+  tabuleiro: state.tabuleiro.tabuleiro,
+  aguardandoSegundoClick: state.pecas.aguardandoSegundoClick
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca, limpar }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Casa);

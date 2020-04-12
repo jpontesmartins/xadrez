@@ -1,3 +1,9 @@
+export const limpar = () => ({
+  type: 'LIMPAR',
+  payload: {}
+});
+
+
 export const moverPeca = (casaOrigem, peca, linha, coluna, cor) => ({
   type: 'MOVER_PECA',
   payload: {
