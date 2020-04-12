@@ -5,8 +5,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SELECIONAR_PECA':
-      console.log(action.type);
-      // console.log(action.payload.aguardandoSegundoClick);
       const newState = {
         ...state,
         pecaSelecionada: action.payload.peca,

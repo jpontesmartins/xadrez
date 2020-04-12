@@ -2,13 +2,9 @@ import { A, B, C, D, E, F, G, H } from "../../components/constants";
 import { organizarPecas } from "../../components/Tabuleiro/columns";
 import movePieces from '../../components/Tabuleiro/movePieces';
 
-
-export const moveAll = (payload, state) => {
+export const movePiece = (payload, state) => {
     const { coluna, linha, peca, cor, casaOrigem } = payload;
     const destino = { peca, linha, cor, coluna };
-  
-    console.log(`Casa origem: ${casaOrigem}`);
-    console.log(`Casa destino: ${destino.coluna}${destino.linha}`);
   
     const colunaOrigem = casaOrigem.split("")[0];
     const colunaDestino = destino.coluna;
@@ -16,32 +12,32 @@ export const moveAll = (payload, state) => {
     if (colunaOrigem === colunaDestino) {
       return {
         ...state,
-        colunaA: move(A, casaOrigem, state, destino),
-        colunaB: move(B, casaOrigem, state, destino),
-        colunaC: move(C, casaOrigem, state, destino),
-        colunaD: move(D, casaOrigem, state, destino),
-        colunaE: move(E, casaOrigem, state, destino),
-        colunaF: move(F, casaOrigem, state, destino),
-        colunaG: move(G, casaOrigem, state, destino),
-        colunaH: move(H, casaOrigem, state, destino),
+        colunaA: mesmaColuna(A, casaOrigem, state, destino),
+        colunaB: mesmaColuna(B, casaOrigem, state, destino),
+        colunaC: mesmaColuna(C, casaOrigem, state, destino),
+        colunaD: mesmaColuna(D, casaOrigem, state, destino),
+        colunaE: mesmaColuna(E, casaOrigem, state, destino),
+        colunaF: mesmaColuna(F, casaOrigem, state, destino),
+        colunaG: mesmaColuna(G, casaOrigem, state, destino),
+        colunaH: mesmaColuna(H, casaOrigem, state, destino),
       }
     } else {
       return {
         ...state,
-        colunaA: movimentacao(A, casaOrigem, state, destino),
-        colunaB: movimentacao(B, casaOrigem, state, destino),
-        colunaC: movimentacao(C, casaOrigem, state, destino),
-        colunaD: movimentacao(D, casaOrigem, state, destino),
-        colunaE: movimentacao(E, casaOrigem, state, destino),
-        colunaF: movimentacao(F, casaOrigem, state, destino),
-        colunaG: movimentacao(G, casaOrigem, state, destino),
-        colunaH: movimentacao(H, casaOrigem, state, destino),
+        colunaA: colunasDiferentes(A, casaOrigem, state, destino),
+        colunaB: colunasDiferentes(B, casaOrigem, state, destino),
+        colunaC: colunasDiferentes(C, casaOrigem, state, destino),
+        colunaD: colunasDiferentes(D, casaOrigem, state, destino),
+        colunaE: colunasDiferentes(E, casaOrigem, state, destino),
+        colunaF: colunasDiferentes(F, casaOrigem, state, destino),
+        colunaG: colunasDiferentes(G, casaOrigem, state, destino),
+        colunaH: colunasDiferentes(H, casaOrigem, state, destino),
       }
     }
   
   }
   
-export function move(colunaAtual, casaOrigem, state, destino) {
+export function mesmaColuna(colunaAtual, casaOrigem, state, destino) {
     const { coluna } = destino;
     const colunaDestino = coluna;
     const allColumns = organizarPecas(state);
@@ -55,7 +51,7 @@ export function move(colunaAtual, casaOrigem, state, destino) {
   
   }
   
-  function movimentacao(colunaAtual, casaOrigem, state, destino) {
+  function colunasDiferentes(colunaAtual, casaOrigem, state, destino) {
     const { peca, linha, cor, coluna } = destino
     const allColumns = organizarPecas(state);
   

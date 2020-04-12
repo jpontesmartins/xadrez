@@ -35,7 +35,6 @@ class Peca extends Component {
       pecaDeAtaque, selecionarPeca, capturarPeca, pecaSelecionada } = this.props;
 
     if (aguardandoSegundoClick && pecaDeAtaque.cor !== cor) {
-      console.log("Captura de Peca");
       const pecaOrigemAtaque = pecaSelecionada;
       capturarPeca(this.getCasa(), peca, linha, coluna, cor, pecaDeAtaque, pecaOrigemAtaque);
     } else {
