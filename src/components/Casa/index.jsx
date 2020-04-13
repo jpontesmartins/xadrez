@@ -46,15 +46,11 @@ class Casa extends Component {
     const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, moverPeca, limpar, aguardandoSegundoClick } = this.props;
     moverPeca(casaOrigem, pecaSelecionada, linha, coluna, corDaPeca);
     limpar();
-    console.log("Casa handleClick()");
-    // console.log(this.props);
-    console.log("Casa handleClick()");
-
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
-    console.log(this.props);
+    // console.log(prevProps);
+    // console.log(this.props);
   }
 
   render() {

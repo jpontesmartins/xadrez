@@ -1,6 +1,10 @@
+import React from 'react';
+
+import Casa from '../../components/Casa';
+import Peca from '../../components/Peca';
+
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
 import { organizarPecas } from "../../components/Tabuleiro/columns";
-import movePieces from '../../components/Tabuleiro/movePieces';
 
 export const movePiece = (payload, state) => {
   const { coluna, linha, peca, cor, casaOrigem } = payload;
@@ -39,10 +43,10 @@ export const movePiece = (payload, state) => {
 
 export const mesmaColuna = (colunaAtual, casaOrigem, state, destino) => {
   const allColumns = organizarPecas(state);
+  const colunaOrigem = casaOrigem.split("")[0];
 
-  if (destino.coluna == colunaAtual) {
-    const colunaOrigem = casaOrigem.split("")[0];
-    return movePieces.movePieceToTheSameColumn(casaOrigem, allColumns.get(colunaOrigem), destino);
+  if (colunaAtual == destino.coluna) {
+    return movePieceToTheSameColumn(casaOrigem, allColumns.get(colunaOrigem), destino);
   } else {
     return allColumns.get(colunaAtual);
   }
@@ -54,13 +58,124 @@ export const colunasDiferentes = (colunaAtual, casaOrigem, state, destino) => {
   const allColumns = organizarPecas(state);
   const colunaOrigem = casaOrigem.split("")[0];
 
-  if (colunaOrigem == colunaAtual) {
-    return movePieces.esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
+  if (colunaAtual == colunaOrigem) {
+    return esvaziaCasaDaPecaMovimentada(casaOrigem, allColumns);
   }
 
   if (coluna == colunaAtual) {
-    return movePieces.movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor);
+    return movePieceToAnotherColumn(casaOrigem, coluna, allColumns.get(coluna), peca, linha, cor);
   } else {
     return allColumns.get(colunaAtual);
   }
+}
+
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
+const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
+  const nomeColuna = casaOrigem.split("")[0];
+  const linhaOrigem = parseInt(casaOrigem.split("")[1]);
+  const novaColuna = new Map();
+  allColumns.get(nomeColuna).map((linhaProps, i) => {
+    if (linhaProps.props.peca) {
+      const pecaa = buildPiece(linhaProps, nomeColuna);
+      novaColuna.set(parseInt(linhaProps.props.linha), pecaa);
+    } else {
+      const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
+      novaColuna.set(parseInt(linhaProps.props.linha), casaVazia);
+    }
+
+  });
+
+  const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
+  novaColuna.set(linhaOrigem, pecaVazia);
+
+  return posicionarPecas(novaColuna);
+
+}
+
+
+const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, destino) => {
+  const { peca, linha, cor } = destino;
+
+  const linhaOrigem = parseInt(casaOrigem.split("")[1]);
+  const nomeColuna = casaOrigem.split("")[0];
+
+  let linhas = new Map();
+  colunaCompleta.map((linhaProps, i) => {
+    if (linhaProps.props.peca) {
+      const pecaa =
+        <Peca peca={linhaProps.props.peca}
+          cor={linhaProps.props.cor}
+          coluna={nomeColuna}
+          linha={linhaProps.props.linha}></Peca>;
+
+      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+    } else if (linhaProps.props.coluna) {
+      const casaVazia =
+        <Casa
+          coluna={nomeColuna}
+          linha={parseInt(linhaProps.props.linha)} />;
+      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+    }
+  });
+
+  const novaPosicaoDaPeca =
+    <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
+  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+
+  const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
+  linhas.set(linhaOrigem, pecaVazia);
+
+  return posicionarPecas(linhas);
+}
+
+
+
+
+const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, linha, cor) => {
+
+  let linhas = new Map();
+  colunaCompleta.map((linhaProps) => {
+
+    if (linhaProps.props.peca) {
+      const pecaa = buildPiece(linhaProps, nomeColuna);
+      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+    } else {
+      const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
+      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+
+    }
+  });
+
+  const novaPosicaoDaPeca =
+    <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
+  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+
+  return posicionarPecas(linhas);
+}
+
+
+
+//separar num outro arquivo
+//codigo replicado em "captura.js"
+
+function buildPiece(linhaProps, nomeColuna) {
+  return <Peca peca={linhaProps.props.peca}
+      cor={linhaProps.props.cor} coluna={nomeColuna}
+      linha={linhaProps.props.linha}>
+  </Peca>;
+}
+
+let posicionarPecas = linhas => {
+  return [
+      linhas.get(8), linhas.get(7), linhas.get(6), linhas.get(5),
+      linhas.get(4), linhas.get(3), linhas.get(2), linhas.get(1)
+  ];
 }
