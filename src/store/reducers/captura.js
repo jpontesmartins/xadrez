@@ -76,13 +76,13 @@ export const mesmaColuna = (colunaAtual, origem, state, destino) => {
 
 
 
-const capturaPecaMesmaColuna = (origemAtaque, colunaCompleta, destino) => {
+const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
     const pecaDeAtaque = {
-        peca: origemAtaque.pecaSelecionada,
-        cor: origemAtaque.cor
+        peca: origem.pecaSelecionada,
+        cor: origem.cor
     };
 
-    const nomeColuna = origemAtaque.coluna;
+    const nomeColuna = origem.coluna;
 
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
@@ -100,19 +100,17 @@ const capturaPecaMesmaColuna = (origemAtaque, colunaCompleta, destino) => {
     linhas.set(parseInt(linha), novaPosicaoDaPeca);
 
     const pecaVazia = <Casa
-        coluna={origemAtaque.coluna}
-        linha={parseInt(origemAtaque.linha)} />
-    linhas.set(parseInt(origemAtaque.linha), pecaVazia);
-
-    console.log(linhas);
+        coluna={origem.coluna}
+        linha={parseInt(origem.linha)} />
+    linhas.set(parseInt(origem.linha), pecaVazia);
 
     return posicionarPecas(linhas);
 }
 
-const capturaPecaColunasDiferentes = (origemAtaque, colunaCompleta, destino) => {
+const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
     const pecaDeAtaque = {
-        peca: origemAtaque.pecaSelecionada,
-        cor: origemAtaque.cor
+        peca: origem.pecaSelecionada,
+        cor: origem.cor
     };
 
     const nomeColuna = destino.coluna;
@@ -148,14 +146,12 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
             novaColuna.set(parseInt(linhaProps.props.linha), casaVazia);
         }
-
     });
 
     const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
     novaColuna.set(linhaOrigem, pecaVazia);
 
     return posicionarPecas(novaColuna);
-
 }
 
 
