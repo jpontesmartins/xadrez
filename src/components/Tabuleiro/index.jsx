@@ -59,7 +59,6 @@ const mapStateToProps = state => ({
   colunaF: state.tabuleiro.colunaF,
   colunaG: state.tabuleiro.colunaG,
   colunaH: state.tabuleiro.colunaH
-  // tabuleiro: state.montarTabuleiro.tabuleiro
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ montarTabuleiro }, dispatch);

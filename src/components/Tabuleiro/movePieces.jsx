@@ -1,8 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Casa from '../Casa';
 import Peca from '../Peca';
-import { TORRE, PEAO, CAVALO, BISPO, DAMA, REI } from '../constants';
+
+const capturaPecaMesmaColuna = (origemAtaque, colunaCompleta, destino) => {
+  const pecaDeAtaque = {
+    peca: origemAtaque.pecaSelecionada,
+    cor: origemAtaque.cor
+  };
+
+  const nomeColuna = origemAtaque.coluna;
+
+  let linhas = new Map();
+  colunaCompleta.map((linhaProps, i) => {
+    if (linhaProps.props.peca) {
+      const pecaa = buildPiece(linhaProps, nomeColuna);
+      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+    } else {
+      const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
+      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+    }
+  });
+
+  const linha = destino.linha;
+  const novaPosicaoDaPeca = <Peca peca={pecaDeAtaque.peca} cor={pecaDeAtaque.cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
+  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+
+  const pecaVazia = <Casa 
+    coluna={origemAtaque.coluna}
+    linha={parseInt(origemAtaque.linha)} />
+  linhas.set(parseInt(origemAtaque.linha), pecaVazia);
+
+  console.log(linhas);
+
+  return posicionarPecas(linhas);
+}
+
+const capturaPecaColunasDiferentes = (origemAtaque, colunaCompleta, destino) => {
+  const pecaDeAtaque = {
+    peca: origemAtaque.pecaSelecionada,
+    cor: origemAtaque.cor
+  };
+
+  const nomeColuna = destino.coluna;
+
+  let linhas = new Map();
+  colunaCompleta.map((linhaProps, i) => {
+    if (linhaProps.props.peca) {
+      const pecaa = buildPiece(linhaProps, nomeColuna);
+      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+    } else {
+      const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
+      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+    }
+  });
+
+  const linha = destino.linha;
+  const novaPosicaoDaPeca = <Peca peca={pecaDeAtaque.peca} 
+    cor={pecaDeAtaque.cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
+  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+  return posicionarPecas(linhas);
+}
 
 const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
   const nomeColuna = casaOrigem.split("")[0];
@@ -10,15 +68,11 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
   const novaColuna = new Map();
   allColumns.get(nomeColuna).map((linhaProps, i) => {
     if (linhaProps.props.peca) {
-      const pecaa =
-        <Peca peca={linhaProps.props.peca}
-          cor={linhaProps.props.cor}
-          coluna={nomeColuna}
-          linha={linhaProps.props.linha}></Peca>;
+      const pecaa = buildPiece(linhaProps, nomeColuna);
       novaColuna.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
       const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
-        novaColuna.set(parseInt(linhaProps.props.linha), casaVazia);
+      novaColuna.set(parseInt(linhaProps.props.linha), casaVazia);
     }
 
   });
@@ -31,13 +85,10 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
 }
 
 const movePieceToTheSameColumn = (casaOrigem, colunaCompleta, destino) => {
-  const { peca, linha, cor} = destino;
+  const { peca, linha, cor } = destino;
 
   const linhaOrigem = parseInt(casaOrigem.split("")[1]);
   const nomeColuna = casaOrigem.split("")[0];
-
-  console.log("linhaOrigem: " + linhaOrigem);
-  console.log(colunaCompleta);
 
   let linhas = new Map();
   colunaCompleta.map((linhaProps, i) => {
@@ -75,7 +126,6 @@ const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, 
 
     if (linhaProps.props.peca) {
       const pecaa = buildPiece(linhaProps, nomeColuna);
-
       linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
       const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -90,7 +140,6 @@ const movePieceToAnotherColumn = (casaOrigem, nomeColuna, colunaCompleta, peca, 
 
   return posicionarPecas(linhas);
 }
-
 
 
 let posicionarPecas = linhas => {
@@ -110,12 +159,14 @@ let posicionarPecas = linhas => {
 export default {
   movePieceToTheSameColumn,
   movePieceToAnotherColumn,
-  esvaziaCasaDaPecaMovimentada
+  esvaziaCasaDaPecaMovimentada,
+  capturaPecaMesmaColuna,
+  capturaPecaColunasDiferentes
 }
 
 function buildPiece(linhaProps, nomeColuna) {
-  return <Peca peca={linhaProps.props.peca} 
-    cor={linhaProps.props.cor} coluna={nomeColuna} 
+  return <Peca peca={linhaProps.props.peca}
+    cor={linhaProps.props.cor} coluna={nomeColuna}
     linha={linhaProps.props.linha}>
-    </Peca>;
+  </Peca>;
 }

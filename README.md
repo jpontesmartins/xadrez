@@ -11,8 +11,12 @@ Xadrez
     - ~~**BUG:** as vezes fica como se mais de uma peca estivesse selecionada~~
 - **REFATORAR:** movimentação de peça
     - Separar responsabilidades (movimentação e posicionamento inicial)
-- Guardar o segundo clique (peça a ser capturada);
-- Capturar uma peça
+- Capturar peça
+- Salvar tabuleiro em TXT
+- Salvar tabuleiro no banco de dados
+- Girar 180° o tabuleiro
+- Mostrar ao lado do tabuleiro as informações dos dois jogadores
+- Cemitério de peças
 
 
 ### Aplicação para para estudos de CSS, React e JS
