@@ -3,6 +3,10 @@ export const limpar = () => ({
   payload: {}
 });
 
+export const montarTabuleiro = () => ({
+  type: 'MONTAR_TABULEIRO',
+});
+
 
 export const moverPeca = (casaOrigem, peca, linha, coluna, cor) => ({
   type: 'MOVER_PECA',
@@ -38,8 +42,4 @@ export const capturarPeca = (casaDaCaptura, peca, linha, coluna, cor, pecaDeAtaq
     pecaDeAtaque,
     pecaOrigemAtaque
   }
-});
-
-export const montarTabuleiro = () => ({
-  type: 'MONTAR_TABULEIRO',
 });

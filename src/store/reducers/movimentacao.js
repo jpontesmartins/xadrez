@@ -4,7 +4,8 @@ import Casa from '../../components/Casa';
 import Peca from '../../components/Peca';
 
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
-import { organizarPecas } from "../../components/Tabuleiro/columns";
+
+import builder from "./builder";
 
 export const movePiece = (payload, state) => {
   const { coluna, linha, peca, cor, casaOrigem } = payload;
@@ -43,7 +44,7 @@ export const movePiece = (payload, state) => {
 }
 
 export const mesmaColuna = (colunaAtual, origem, state, destino) => {
-  const allColumns = organizarPecas(state);
+  const allColumns = builder.organizarPecas(state);
 
   if (colunaAtual == destino.coluna) {
     return movePieceToTheSameColumn(origem, allColumns.get(origem.coluna), destino);
@@ -55,7 +56,7 @@ export const mesmaColuna = (colunaAtual, origem, state, destino) => {
 
 export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
   const { peca, linha, cor, coluna } = destino;
-  const allColumns = organizarPecas(state);
+  const allColumns = builder.organizarPecas(state);
 
   if (colunaAtual == origem.coluna) {
     return esvaziaCasaDaPecaMovimentada(origem, allColumns);
@@ -77,11 +78,11 @@ export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
  * 
  */
 
-const esvaziaCasaDaPecaMovimentada = (origem, allColumns) => {
+const esvaziaCasaDaPecaMovimentada = (origem, columns) => {
   const novaColuna = new Map();
-  allColumns.get(origem.coluna).map((linhaProps) => {
+  columns.get(origem.coluna).map((linhaProps) => {
     if (linhaProps.props.peca) {
-      const peca = buildPiece(linhaProps, origem.coluna);
+      const peca = builder.buildPiece(linhaProps, origem.coluna);
       novaColuna.set(parseInt(linhaProps.props.linha), peca);
     } else {
       const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
@@ -92,7 +93,7 @@ const esvaziaCasaDaPecaMovimentada = (origem, allColumns) => {
   const pecaVazia = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
   novaColuna.set(parseInt(origem.linha), pecaVazia);
 
-  return posicionarPecas(novaColuna);
+  return builder.posicionarPecas(novaColuna);
 }
 
 
@@ -102,7 +103,7 @@ const movePieceToTheSameColumn = (origem, colunaCompleta, destino) => {
   let linhas = new Map();
   colunaCompleta.map((linhaProps, i) => {
     if (linhaProps.props.peca) {
-      const pecaa = buildPiece(linhaProps, origem.coluna);
+      const pecaa = builder.buildPiece(linhaProps, origem.coluna);
       linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
       const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
@@ -117,7 +118,7 @@ const movePieceToTheSameColumn = (origem, colunaCompleta, destino) => {
   const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
   linhas.set(parseInt(origem.linha), casaVazia);
 
-  return posicionarPecas(linhas);
+  return builder.posicionarPecas(linhas);
 }
 
 const movePieceToAnotherColumn = (nomeColuna, colunaCompleta, peca, linha, cor) => {
@@ -126,7 +127,7 @@ const movePieceToAnotherColumn = (nomeColuna, colunaCompleta, peca, linha, cor) 
   colunaCompleta.map((linhaProps) => {
 
     if (linhaProps.props.peca) {
-      const pecaa = buildPiece(linhaProps, nomeColuna);
+      const pecaa = builder.buildPiece(linhaProps, nomeColuna);
       linhas.set(parseInt(linhaProps.props.linha), pecaa);
     } else {
       const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -139,22 +140,6 @@ const movePieceToAnotherColumn = (nomeColuna, colunaCompleta, peca, linha, cor) 
     <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
   linhas.set(parseInt(linha), pecaEmNovaPosicao);
 
-  return posicionarPecas(linhas);
+  return builder.posicionarPecas(linhas);
 }
 
-//separar num outro arquivo
-//codigo replicado em "captura.js"
-
-function buildPiece(linhaProps, nomeColuna) {
-  return <Peca peca={linhaProps.props.peca}
-    cor={linhaProps.props.cor} coluna={nomeColuna}
-    linha={linhaProps.props.linha}>
-  </Peca>;
-}
-
-let posicionarPecas = linhas => {
-  return [
-    linhas.get(8), linhas.get(7), linhas.get(6), linhas.get(5),
-    linhas.get(4), linhas.get(3), linhas.get(2), linhas.get(1)
-  ];
-}

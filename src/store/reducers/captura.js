@@ -4,8 +4,9 @@ import Casa from '../../components/Casa';
 import Peca from '../../components/Peca';
 
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
-import { organizarPecas } from "../../components/Tabuleiro/columns";
 import { mesmaColuna as movimentarNaMesmaColuna } from "./movimentacao.js";
+
+import builder from "./builder";
 
 export const capturePiece = (payload, state) => {
     const { peca, linha, coluna, cor } = payload;
@@ -40,7 +41,7 @@ export const capturePiece = (payload, state) => {
 }
 
 export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
-    const allColumns = organizarPecas(state);
+    const allColumns = builder.organizarPecas(state);
     const casaDeOrigem = origem.coluna + "" + origem.linha;
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
@@ -56,7 +57,7 @@ export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
 }
 
 export const mesmaColuna = (colunaAtual, origem, state, destino) => {
-    const allColumns = organizarPecas(state);
+    const allColumns =  builder.organizarPecas(state);
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
     if (colunaAtual == destino.coluna) {
@@ -87,7 +88,7 @@ const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
         if (linhaProps.props.peca) {
-            const pecaa = buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
             linhas.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -104,7 +105,7 @@ const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
         linha={parseInt(origem.linha)} />
     linhas.set(parseInt(origem.linha), pecaVazia);
 
-    return posicionarPecas(linhas);
+    return builder.posicionarPecas(linhas);
 }
 
 const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
@@ -118,7 +119,7 @@ const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
         if (linhaProps.props.peca) {
-            const pecaa = buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
             linhas.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -130,7 +131,7 @@ const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
     const novaPosicaoDaPeca = <Peca peca={pecaDeAtaque.peca}
         cor={pecaDeAtaque.cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
     linhas.set(parseInt(linha), novaPosicaoDaPeca);
-    return posicionarPecas(linhas);
+    return builder.posicionarPecas(linhas);
 }
 
 
@@ -140,7 +141,7 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
     const novaColuna = new Map();
     allColumns.get(nomeColuna).map((linhaProps, i) => {
         if (linhaProps.props.peca) {
-            const pecaa = buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
             novaColuna.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -151,20 +152,6 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
     const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
     novaColuna.set(linhaOrigem, pecaVazia);
 
-    return posicionarPecas(novaColuna);
+    return builder.posicionarPecas(novaColuna);
 }
 
-
-function buildPiece(linhaProps, nomeColuna) {
-    return <Peca peca={linhaProps.props.peca}
-        cor={linhaProps.props.cor} coluna={nomeColuna}
-        linha={linhaProps.props.linha}>
-    </Peca>;
-}
-
-let posicionarPecas = linhas => {
-    return [
-        linhas.get(8), linhas.get(7), linhas.get(6), linhas.get(5),
-        linhas.get(4), linhas.get(3), linhas.get(2), linhas.get(1)
-    ];
-}
