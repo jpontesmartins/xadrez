@@ -4,7 +4,7 @@ import Casa from '../../components/Casa';
 import Peca from '../../components/Peca';
 
 import { A, B, C, D, E, F, G, H } from "../../components/constants";
-import { mesmaColuna as movimentarNaMesmaColuna } from "./movimentacao.js";
+import { sameColumn as moveAtSameColumn } from "./movimentacao.js";
 
 import builder from "./builder";
 
@@ -52,7 +52,7 @@ export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
     if (colunaAtual == destino.coluna) {
         return capturaPecaColunasDiferentes(origem, allColumns.get(destino.coluna), destino);
     } else {
-        return movimentarNaMesmaColuna(colunaAtual, casaDaCaptura, state, destino);
+        return moveAtSameColumn(colunaAtual, casaDaCaptura, state, destino);
     }
 }
 
@@ -63,7 +63,7 @@ export const mesmaColuna = (colunaAtual, origem, state, destino) => {
     if (colunaAtual == destino.coluna) {
         return capturaPecaMesmaColuna(origem, allColumns.get(destino.coluna), destino);
     } else {
-        return movimentarNaMesmaColuna(colunaAtual, casaDaCaptura, state, destino);
+        return moveAtSameColumn(colunaAtual, casaDaCaptura, state, destino);
     }
 }
 

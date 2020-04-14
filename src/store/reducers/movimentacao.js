@@ -8,42 +8,42 @@ import { A, B, C, D, E, F, G, H } from "../../components/constants";
 import builder from "./builder";
 
 export const movePiece = (payload, state) => {
-  const { coluna, linha, peca, cor, casaOrigem } = payload;
-  const destino = { peca, linha, cor, coluna };
-  const origem = { 
-    linha: casaOrigem.split("")[1], 
-    coluna: casaOrigem.split("")[0] 
+  const { coluna, linha, peca, cor, squareOrigin } = payload;
+  const target = { peca, linha, cor, coluna };
+  const origin = {
+    linha: squareOrigin.split("")[1], 
+    coluna: squareOrigin.split("")[0] 
   }
 
-  if (origem.coluna === destino.coluna) {
+  if (origin.coluna === target.coluna) {
     return {
       ...state,
-      colunaA: mesmaColuna(A, origem, state, destino),
-      colunaB: mesmaColuna(B, origem, state, destino),
-      colunaC: mesmaColuna(C, origem, state, destino),
-      colunaD: mesmaColuna(D, origem, state, destino),
-      colunaE: mesmaColuna(E, origem, state, destino),
-      colunaF: mesmaColuna(F, origem, state, destino),
-      colunaG: mesmaColuna(G, origem, state, destino),
-      colunaH: mesmaColuna(H, origem, state, destino),
+      colunaA: sameColumn(A, origin, state, target),
+      colunaB: sameColumn(B, origin, state, target),
+      colunaC: sameColumn(C, origin, state, target),
+      colunaD: sameColumn(D, origin, state, target),
+      colunaE: sameColumn(E, origin, state, target),
+      colunaF: sameColumn(F, origin, state, target),
+      colunaG: sameColumn(G, origin, state, target),
+      colunaH: sameColumn(H, origin, state, target),
     }
   } else {
     return {
       ...state,
-      colunaA: colunasDiferentes(A, origem, state, destino),
-      colunaB: colunasDiferentes(B, origem, state, destino),
-      colunaC: colunasDiferentes(C, origem, state, destino),
-      colunaD: colunasDiferentes(D, origem, state, destino),
-      colunaE: colunasDiferentes(E, origem, state, destino),
-      colunaF: colunasDiferentes(F, origem, state, destino),
-      colunaG: colunasDiferentes(G, origem, state, destino),
-      colunaH: colunasDiferentes(H, origem, state, destino),
+      colunaA: differentColumns(A, origin, state, target),
+      colunaB: differentColumns(B, origin, state, target),
+      colunaC: differentColumns(C, origin, state, target),
+      colunaD: differentColumns(D, origin, state, target),
+      colunaE: differentColumns(E, origin, state, target),
+      colunaF: differentColumns(F, origin, state, target),
+      colunaG: differentColumns(G, origin, state, target),
+      colunaH: differentColumns(H, origin, state, target),
     }
   }
 
 }
 
-export const mesmaColuna = (currentColumn, origem, state, destino) => {
+export const sameColumn = (currentColumn, origem, state, destino) => {
   const columns = builder.setupColumns(state);
 
   if (currentColumn == destino.coluna) {
@@ -54,12 +54,12 @@ export const mesmaColuna = (currentColumn, origem, state, destino) => {
 
 }
 
-export const colunasDiferentes = (currentColumn, origem, state, destino) => {
-  const { peca, linha, cor, coluna } = destino;
+export const differentColumns = (currentColumn, origem, state, destino) => {
   const columns = builder.setupColumns(state);
+  const { peca, linha, cor, coluna } = destino;
 
   if (currentColumn == origem.coluna) {
-    return esvaziaCasaDaPecaMovimentada(origem, columns);
+    return cleanSquare(origem, columns);
   }
 
   if (coluna == currentColumn) {
@@ -78,19 +78,19 @@ export const colunasDiferentes = (currentColumn, origem, state, destino) => {
  * 
  */
 
-const esvaziaCasaDaPecaMovimentada = (origem, columns) => {
+const cleanSquare = (origin, columns) => {
   const rows = new Map();
-  columns.get(origem.coluna).map((linhaProps) => {
+  columns.get(origin.coluna).map((linhaProps) => {
     if (linhaProps.props.peca) {
       rows.set(parseInt(linhaProps.props.linha), builder.buildPiece(linhaProps.props));
     } else {
-      const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
-      rows.set(parseInt(linhaProps.props.linha), casaVazia);
+      const emptySquare = builder.buildSquare(origin.coluna, linhaProps.props.linha);
+      rows.set(parseInt(linhaProps.props.linha), emptySquare);
     }
   });
 
-  const emptySquare = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
-  rows.set(parseInt(origem.linha), emptySquare);
+  const emptySquare = builder.buildSquare(origin.coluna, origin.linha);
+  rows.set(parseInt(origin.linha), emptySquare);
 
   return builder.setupRows(rows);
 }
@@ -103,8 +103,8 @@ const movePieceToTheSameColumn = (origem, colunaCompleta, destino) => {
     if (linhaProps.props.peca) {
       rows.set(parseInt(linhaProps.props.linha), builder.buildPiece(linhaProps.props));
     } else {
-      const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
-      rows.set(parseInt(linhaProps.props.linha), casaVazia);
+      const emptySquare = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
+      rows.set(parseInt(linhaProps.props.linha), emptySquare);
     }
   });
 

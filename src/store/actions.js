@@ -8,10 +8,10 @@ export const montarTabuleiro = () => ({
 });
 
 
-export const moverPeca = (casaOrigem, peca, linha, coluna, cor) => ({
+export const moverPeca = (squareOrigin, peca, linha, coluna, cor) => ({
   type: 'MOVER_PECA',
   payload: {
-    casaOrigem,
+    squareOrigin,
     peca,
     linha,
     coluna,
