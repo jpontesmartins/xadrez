@@ -43,29 +43,29 @@ export const movePiece = (payload, state) => {
 
 }
 
-export const mesmaColuna = (colunaAtual, origem, state, destino) => {
-  const allColumns = builder.organizarPecas(state);
+export const mesmaColuna = (currentColumn, origem, state, destino) => {
+  const columns = builder.setupColumns(state);
 
-  if (colunaAtual == destino.coluna) {
-    return movePieceToTheSameColumn(origem, allColumns.get(origem.coluna), destino);
+  if (currentColumn == destino.coluna) {
+    return movePieceToTheSameColumn(origem, columns.get(origem.coluna), destino);
   } else {
-    return allColumns.get(colunaAtual);
+    return columns.get(currentColumn);
   }
 
 }
 
-export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
+export const colunasDiferentes = (currentColumn, origem, state, destino) => {
   const { peca, linha, cor, coluna } = destino;
-  const allColumns = builder.organizarPecas(state);
+  const columns = builder.setupColumns(state);
 
-  if (colunaAtual == origem.coluna) {
-    return esvaziaCasaDaPecaMovimentada(origem, allColumns);
+  if (currentColumn == origem.coluna) {
+    return esvaziaCasaDaPecaMovimentada(origem, columns);
   }
 
-  if (coluna == colunaAtual) {
-    return movePieceToAnotherColumn(coluna, allColumns.get(coluna), peca, linha, cor);
+  if (coluna == currentColumn) {
+    return movePieceToAnotherColumn(coluna, columns.get(coluna), peca, linha, cor);
   } else {
-    return allColumns.get(colunaAtual);
+    return columns.get(currentColumn);
   }
 }
 
@@ -79,67 +79,59 @@ export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
  */
 
 const esvaziaCasaDaPecaMovimentada = (origem, columns) => {
-  const novaColuna = new Map();
+  const rows = new Map();
   columns.get(origem.coluna).map((linhaProps) => {
     if (linhaProps.props.peca) {
-      const peca = builder.buildPiece(linhaProps, origem.coluna);
-      novaColuna.set(parseInt(linhaProps.props.linha), peca);
+      rows.set(parseInt(linhaProps.props.linha), builder.buildPiece(linhaProps.props));
     } else {
       const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
-      novaColuna.set(parseInt(linhaProps.props.linha), casaVazia);
+      rows.set(parseInt(linhaProps.props.linha), casaVazia);
     }
   });
 
-  const pecaVazia = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
-  novaColuna.set(parseInt(origem.linha), pecaVazia);
+  const emptySquare = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
+  rows.set(parseInt(origem.linha), emptySquare);
 
-  return builder.posicionarPecas(novaColuna);
+  return builder.setupRows(rows);
 }
-
 
 const movePieceToTheSameColumn = (origem, colunaCompleta, destino) => {
   const { peca, linha, cor } = destino;
 
-  let linhas = new Map();
-  colunaCompleta.map((linhaProps, i) => {
+  let rows = new Map();
+  colunaCompleta.map((linhaProps) => {
     if (linhaProps.props.peca) {
-      const pecaa = builder.buildPiece(linhaProps, origem.coluna);
-      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+      rows.set(parseInt(linhaProps.props.linha), builder.buildPiece(linhaProps.props));
     } else {
       const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(linhaProps.props.linha)} />;
-      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
+      rows.set(parseInt(linhaProps.props.linha), casaVazia);
     }
   });
 
-  const novaPosicaoDaPeca = <Peca peca={peca} 
-    cor={cor} coluna={origem.coluna} linha={parseInt(linha)}></Peca>;
-  linhas.set(parseInt(linha), novaPosicaoDaPeca);
+  const pieceAtNewPosition = <Peca peca={peca} cor={cor} coluna={origem.coluna} linha={parseInt(linha)}></Peca>;
+  rows.set(parseInt(linha), pieceAtNewPosition);
 
-  const casaVazia = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
-  linhas.set(parseInt(origem.linha), casaVazia);
+  const emptySquare = <Casa coluna={origem.coluna} linha={parseInt(origem.linha)} />
+  rows.set(parseInt(origem.linha), emptySquare);
 
-  return builder.posicionarPecas(linhas);
+  return builder.setupRows(rows);
 }
 
 const movePieceToAnotherColumn = (nomeColuna, colunaCompleta, peca, linha, cor) => {
 
-  let linhas = new Map();
+  let rows = new Map();
   colunaCompleta.map((linhaProps) => {
-
     if (linhaProps.props.peca) {
-      const pecaa = builder.buildPiece(linhaProps, nomeColuna);
-      linhas.set(parseInt(linhaProps.props.linha), pecaa);
+      rows.set(parseInt(linhaProps.props.linha), builder.buildPiece(linhaProps.props));
     } else {
       const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
-      linhas.set(parseInt(linhaProps.props.linha), casaVazia);
-
+      rows.set(parseInt(linhaProps.props.linha), casaVazia);
     }
   });
 
-  const pecaEmNovaPosicao =
-    <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
-  linhas.set(parseInt(linha), pecaEmNovaPosicao);
+  const pieceAtNewPosition = <Peca peca={peca} cor={cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
+  rows.set(parseInt(linha), pieceAtNewPosition);
 
-  return builder.posicionarPecas(linhas);
+  return builder.setupRows(rows);
 }
 

@@ -16,7 +16,7 @@ const columnA = () => {
   rows.set(1, <Peca peca={TORRE} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 };
 
 const columnB = () => {
@@ -28,7 +28,7 @@ const columnB = () => {
   rows.set(1, <Peca peca={CAVALO} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 const columnC = () => {
@@ -41,7 +41,7 @@ const columnC = () => {
   rows.set(1, <Peca peca={BISPO} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 const columnD = () => {
@@ -54,7 +54,7 @@ const columnD = () => {
   rows.set(1, <Peca peca={DAMA} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 
@@ -68,7 +68,7 @@ const columnE = () => {
   rows.set(1, <Peca peca={REI} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 const columnF = () => {
@@ -81,7 +81,7 @@ const columnF = () => {
   rows.set(1, <Peca peca={BISPO} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 const columnG = () => {
@@ -94,7 +94,7 @@ const columnG = () => {
   rows.set(1, <Peca peca={CAVALO} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 const columnH = () => {
@@ -107,7 +107,7 @@ const columnH = () => {
   rows.set(1, <Peca peca={TORRE} cor="branca" coluna={column} linha="1" />);
   middleChessboard(rows, column);
 
-  return builder.posicionarPecas(rows);
+  return builder.setupRows(rows);
 }
 
 

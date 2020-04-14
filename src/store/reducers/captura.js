@@ -41,7 +41,7 @@ export const capturePiece = (payload, state) => {
 }
 
 export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
-    const allColumns = builder.organizarPecas(state);
+    const allColumns = builder.setupColumns(state);
     const casaDeOrigem = origem.coluna + "" + origem.linha;
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
@@ -57,7 +57,7 @@ export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
 }
 
 export const mesmaColuna = (colunaAtual, origem, state, destino) => {
-    const allColumns =  builder.organizarPecas(state);
+    const allColumns =  builder.setupColumns(state);
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
     if (colunaAtual == destino.coluna) {
@@ -87,8 +87,12 @@ const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
 
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
+        console.log("linhaProps");
+        console.log(linhaProps.props);
+        const pecaCompleta = linhaProps.props;
+
         if (linhaProps.props.peca) {
-            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(pecaCompleta);
             linhas.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -105,7 +109,7 @@ const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
         linha={parseInt(origem.linha)} />
     linhas.set(parseInt(origem.linha), pecaVazia);
 
-    return builder.posicionarPecas(linhas);
+    return builder.setupRows(linhas);
 }
 
 const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
@@ -118,8 +122,10 @@ const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
 
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
+        const pecaCompleta = linhaProps.props;
+
         if (linhaProps.props.peca) {
-            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(pecaCompleta);
             linhas.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -131,7 +137,7 @@ const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
     const novaPosicaoDaPeca = <Peca peca={pecaDeAtaque.peca}
         cor={pecaDeAtaque.cor} coluna={nomeColuna} linha={parseInt(linha)}></Peca>;
     linhas.set(parseInt(linha), novaPosicaoDaPeca);
-    return builder.posicionarPecas(linhas);
+    return builder.setupRows(linhas);
 }
 
 
@@ -140,8 +146,10 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
     const linhaOrigem = parseInt(casaOrigem.split("")[1]);
     const novaColuna = new Map();
     allColumns.get(nomeColuna).map((linhaProps, i) => {
+        const pecaCompleta = linhaProps.props;
+
         if (linhaProps.props.peca) {
-            const pecaa = builder.buildPiece(linhaProps, nomeColuna);
+            const pecaa = builder.buildPiece(pecaCompleta);
             novaColuna.set(parseInt(linhaProps.props.linha), pecaa);
         } else {
             const casaVazia = <Casa coluna={nomeColuna} linha={parseInt(linhaProps.props.linha)} />;
@@ -152,6 +160,6 @@ const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
     const pecaVazia = <Casa coluna={nomeColuna} linha={linhaOrigem} />
     novaColuna.set(linhaOrigem, pecaVazia);
 
-    return builder.posicionarPecas(novaColuna);
+    return builder.setupRows(novaColuna);
 }
 
