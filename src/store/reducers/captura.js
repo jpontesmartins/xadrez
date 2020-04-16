@@ -16,68 +16,58 @@ export const capturePiece = (payload, state) => {
     if (origem.coluna == destino.coluna) {
         return {
             ...state,
-            colunaA: mesmaColuna(A, origem, state, destino),
-            colunaB: mesmaColuna(B, origem, state, destino),
-            colunaC: mesmaColuna(C, origem, state, destino),
-            colunaD: mesmaColuna(D, origem, state, destino),
-            colunaE: mesmaColuna(E, origem, state, destino),
-            colunaF: mesmaColuna(F, origem, state, destino),
-            colunaG: mesmaColuna(G, origem, state, destino),
-            colunaH: mesmaColuna(H, origem, state, destino),
+            colunaA: sameColumn(A, origem, state, destino),
+            colunaB: sameColumn(B, origem, state, destino),
+            colunaC: sameColumn(C, origem, state, destino),
+            colunaD: sameColumn(D, origem, state, destino),
+            colunaE: sameColumn(E, origem, state, destino),
+            colunaF: sameColumn(F, origem, state, destino),
+            colunaG: sameColumn(G, origem, state, destino),
+            colunaH: sameColumn(H, origem, state, destino),
         }
     } else {
         return {
             ...state,
-            colunaA: colunasDiferentes(A, origem, state, destino),
-            colunaB: colunasDiferentes(B, origem, state, destino),
-            colunaC: colunasDiferentes(C, origem, state, destino),
-            colunaD: colunasDiferentes(D, origem, state, destino),
-            colunaE: colunasDiferentes(E, origem, state, destino),
-            colunaF: colunasDiferentes(F, origem, state, destino),
-            colunaG: colunasDiferentes(G, origem, state, destino),
-            colunaH: colunasDiferentes(H, origem, state, destino),
+            colunaA: differentColumns(A, origem, state, destino),
+            colunaB: differentColumns(B, origem, state, destino),
+            colunaC: differentColumns(C, origem, state, destino),
+            colunaD: differentColumns(D, origem, state, destino),
+            colunaE: differentColumns(E, origem, state, destino),
+            colunaF: differentColumns(F, origem, state, destino),
+            colunaG: differentColumns(G, origem, state, destino),
+            colunaH: differentColumns(H, origem, state, destino),
         }
     }
 }
 
-export const colunasDiferentes = (colunaAtual, origem, state, destino) => {
+export const differentColumns = (colunaAtual, origem, state, destino) => {
     const allColumns = builder.setupColumns(state);
     const casaDeOrigem = origem.coluna + "" + origem.linha;
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
     if (colunaAtual == origem.coluna) {
-        return esvaziaCasaDaPecaMovimentada(casaDeOrigem, allColumns);
+        return emptySquareOrigin(casaDeOrigem, allColumns);
     }
 
     if (colunaAtual == destino.coluna) {
-        return capturaPecaColunasDiferentes(origem, allColumns.get(destino.coluna), destino);
+        return captureAtDifferentColumn(origem, allColumns.get(destino.coluna), destino);
     } else {
         return moveAtSameColumn(colunaAtual, casaDaCaptura, state, destino);
     }
 }
 
-export const mesmaColuna = (colunaAtual, origem, state, destino) => {
+export const sameColumn = (colunaAtual, origem, state, destino) => {
     const allColumns =  builder.setupColumns(state);
     const casaDaCaptura = destino.coluna + "" + destino.linha;
 
     if (colunaAtual == destino.coluna) {
-        return capturaPecaMesmaColuna(origem, allColumns.get(destino.coluna), destino);
+        return captureAtSameColumn(origem, allColumns.get(destino.coluna), destino);
     } else {
         return moveAtSameColumn(colunaAtual, casaDaCaptura, state, destino);
     }
 }
 
-/**
- * 
- * 
- * 
- * 
- * 
- */
-
-
-
-const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
+const captureAtSameColumn = (origem, colunaCompleta, destino) => {
     const pecaDeAtaque = {
         peca: origem.pecaSelecionada,
         cor: origem.cor
@@ -112,7 +102,7 @@ const capturaPecaMesmaColuna = (origem, colunaCompleta, destino) => {
     return builder.setupRows(linhas);
 }
 
-const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
+const captureAtDifferentColumn = (origem, colunaCompleta, destino) => {
     const pecaDeAtaque = {
         peca: origem.pecaSelecionada,
         cor: origem.cor
@@ -141,7 +131,7 @@ const capturaPecaColunasDiferentes = (origem, colunaCompleta, destino) => {
 }
 
 
-const esvaziaCasaDaPecaMovimentada = (casaOrigem, allColumns) => {
+const emptySquareOrigin = (casaOrigem, allColumns) => {
     const nomeColuna = casaOrigem.split("")[0];
     const linhaOrigem = parseInt(casaOrigem.split("")[1]);
     const novaColuna = new Map();
