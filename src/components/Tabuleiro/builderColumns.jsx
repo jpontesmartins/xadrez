@@ -1,158 +1,130 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Casa from '../Casa';
 import Peca from '../Peca';
-import { TORRE, PEAO, CAVALO, BISPO, DAMA, REI } from '../constants';
+import { TORRE, PEAO, CAVALO, BISPO, DAMA, REI, A, B, C, D, E, F, G, H } from '../constants';
 
-const buildColumnA = () => {
-  const nomeColuna = "A";
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={TORRE} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={TORRE} cor="branca" coluna={nomeColuna} linha="1" />);
+import builder from "../../store/reducers/builder";
 
-  return posicionarPecas(colunas);
+const columnA = () => {
+  const column = A;
+  const rows = new Map();
+
+  rows.set(8, <Peca peca={TORRE} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={TORRE} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
+
+  return builder.setupRows(rows);
 };
 
-const buildColumnB = () => {
-  const nomeColuna = "B";
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
+const columnB = () => {
+  const column = B;
+  let rows = new Map();
+  rows.set(8, <Peca peca={CAVALO} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={CAVALO} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
 
-  return posicionarPecas(colunas);
+  return builder.setupRows(rows);
+}
+
+const columnC = () => {
+  const column = C;
+  const rows = new Map();
+
+  rows.set(8, <Peca peca={BISPO} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={BISPO} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
+
+  return builder.setupRows(rows);
+}
+
+const columnD = () => {
+  const column = D;
+  const rows = new Map();
+
+  rows.set(8, <Peca peca={DAMA} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={DAMA} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
+
+  return builder.setupRows(rows);
 }
 
 
-const buildColumnC = () => {
-  const nomeColuna = "C";
+const columnE = () => {
+  const column = E;
+  const rows = new Map();
 
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={BISPO} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={BISPO} cor="branca" coluna={nomeColuna} linha="1" />);
+  rows.set(8, <Peca peca={REI} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={REI} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
 
-  return posicionarPecas(colunas);
+  return builder.setupRows(rows);
 }
 
-const buildColumnD = () => {
-  const nomeColuna = "D";
+const columnF = () => {
+  const column = F;
+  const rows = new Map();
 
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={DAMA} peca={DAMA} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={DAMA} cor="branca" coluna={nomeColuna} linha="1" />);
+  rows.set(8, <Peca peca={BISPO} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={BISPO} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
 
-  return posicionarPecas(colunas);
+  return builder.setupRows(rows);
+}
+
+const columnG = () => {
+  const column = G;
+  const rows = new Map();
+
+  rows.set(8, <Peca peca={CAVALO} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={CAVALO} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
+
+  return builder.setupRows(rows);
+}
+
+const columnH = () => {
+  const column = H;
+  const rows = new Map();
+
+  rows.set(8, <Peca peca={TORRE} cor="preta" coluna={column} linha="8" />);
+  rows.set(7, <Peca peca={PEAO} cor="preta" coluna={column} linha="7" />);
+  rows.set(2, <Peca peca={PEAO} cor="branca" coluna={column} linha="2" />);
+  rows.set(1, <Peca peca={TORRE} cor="branca" coluna={column} linha="1" />);
+  middleChessboard(rows, column);
+
+  return builder.setupRows(rows);
 }
 
 
-const buildColumnE = () => {
-  const nomeColuna = "E";
-
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={REI} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={REI} cor="branca" coluna={nomeColuna} linha="1" />);
-
-  return posicionarPecas(colunas);
-}
-
-const buildColumnF = () => {
-  const nomeColuna = "F";
-
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={BISPO} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={BISPO} cor="branca" coluna={nomeColuna} linha="1" />);
-
-  return posicionarPecas(colunas);
-}
-
-const buildColumnG = () => {
-  const nomeColuna = "G";
-
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={CAVALO} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={CAVALO} cor="branca" coluna={nomeColuna} linha="1" />);
-
-  return posicionarPecas(colunas);
-}
-
-const buildColumnH = () => {
-  const nomeColuna = "H";
-
-  let colunas = new Map();
-  colunas.set(8, <Peca peca={TORRE} cor="preta" coluna={nomeColuna} linha="8" />);
-  colunas.set(7, <Peca peca={PEAO} cor="preta" coluna={nomeColuna} linha="7" />);
-  colunas.set(6, <Casa coluna={nomeColuna} linha="6" />);
-  colunas.set(5, <Casa coluna={nomeColuna} linha="5" />);
-  colunas.set(4, <Casa coluna={nomeColuna} linha="4" />);
-  colunas.set(3, <Casa coluna={nomeColuna} linha="3" />);
-  colunas.set(2, <Peca peca={PEAO} cor="branca" coluna={nomeColuna} linha="2" />);
-  colunas.set(1, <Peca peca={TORRE} cor="branca" coluna={nomeColuna} linha="1" />);
-
-  return posicionarPecas(colunas);
-}
-
-let posicionarPecas = linhas => {
-  let posicoes = [
-    linhas.get(8),
-    linhas.get(7),
-    linhas.get(6),
-    linhas.get(5),
-    linhas.get(4),
-    linhas.get(3),
-    linhas.get(2),
-    linhas.get(1)
-  ];
-  return posicoes;
+const middleChessboard = (rows, column) => {
+  rows.set(6, <Casa coluna={column} linha="6" />);
+  rows.set(5, <Casa coluna={column} linha="5" />);
+  rows.set(4, <Casa coluna={column} linha="4" />);
+  rows.set(3, <Casa coluna={column} linha="3" />);
 }
 
 export default {
-  buildColumnA,
-  buildColumnB,
-  buildColumnC,
-  buildColumnD,
-  buildColumnE,
-  buildColumnF,
-  buildColumnG,
-  buildColumnH
+  columnA,
+  columnB,
+  columnC,
+  columnD,
+  columnE,
+  columnF,
+  columnG,
+  columnH
 }

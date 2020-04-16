@@ -1,6 +1,6 @@
-import builderColumns from '../../components/Tabuleiro/builderColumns';
 import { movePiece } from "./movimentacao";
 import { capturePiece } from "./captura";
+import builder from "./builder";
 
 const INITIAL_STATE = {
   colunaA: "",
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'MONTAR_TABULEIRO':
-      return montaTabuleiroInicial(state)
+      return builder.startingPosition(state);
     case 'MOVER_PECA':
       return movePiece(action.payload, state);
     case 'CAPTURAR_PECA':
@@ -24,18 +24,4 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state
   }
-}
-
-const montaTabuleiroInicial = (state) => {
-  return {
-    ...state,
-    colunaA: builderColumns.buildColumnA(),
-    colunaB: builderColumns.buildColumnB(),
-    colunaC: builderColumns.buildColumnC(),
-    colunaD: builderColumns.buildColumnD(),
-    colunaE: builderColumns.buildColumnE(),
-    colunaF: builderColumns.buildColumnF(),
-    colunaG: builderColumns.buildColumnG(),
-    colunaH: builderColumns.buildColumnH()
-  };
 }
