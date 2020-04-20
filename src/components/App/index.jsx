@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Tabuleiro from '../Tabuleiro';
+import PlayersStatus from '../PlayersStatus';
 
 class App extends Component {
   constructor() {
@@ -8,8 +9,19 @@ class App extends Component {
 
   render() {
 
+    const table = { 
+      backgroundColor: "#FFF",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr"
+    };
+
     return (
-      <Tabuleiro />
+      <Fragment>
+        <div style={table}>
+          <Tabuleiro />
+          <PlayersStatus />
+        </div>
+      </Fragment>
     );
   }
 }
