@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { selecionarPeca, capturarPeca } from '../../store/actions';
+import { selecionarPeca, capturarPeca, limpar } from '../../store/actions';
 import PecaComponent from './PecaComponent';
 
 import '../Tabuleiro/styles.css';
@@ -32,11 +32,12 @@ class Peca extends Component {
 
   handleClick() {
     const { cor, peca, linha, coluna, aguardandoSegundoClick,
-      pecaDeAtaque, selecionarPeca, capturarPeca, pecaSelecionada } = this.props;
+      pecaDeAtaque, selecionarPeca, capturarPeca, limpar, pecaSelecionada } = this.props;
 
     if (aguardandoSegundoClick && pecaDeAtaque.cor !== cor) {
       const pecaOrigemAtaque = pecaSelecionada;
       capturarPeca(this.getCasa(), peca, linha, coluna, cor, pecaDeAtaque, pecaOrigemAtaque);
+      limpar();
     } else {
       selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
 
@@ -69,6 +70,6 @@ const mapStateToProps = state => ({
   aguardandoSegundoClick: state.pecas.aguardandoSegundoClick
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca, capturarPeca }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca, capturarPeca, limpar }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peca);

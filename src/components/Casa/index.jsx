@@ -27,7 +27,6 @@ class Casa extends Component {
       }
     }
     return 'vazio';
-
   }
 
   componentDidMount() {
