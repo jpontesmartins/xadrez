@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import builder from "../../store/reducers/builder";
 import { TORRE, PEAO } from "../constants";
 import Player from "./Player"
+import NextPlayer from './Player/NextPlayer';
 
 
 class PlayersStatus extends Component {
@@ -21,23 +21,30 @@ class PlayersStatus extends Component {
             gridTemplateRows: "4fr 3fr 4fr",
         }
 
-        const whoToPlay = {
-            fontSize: "45px",
-            textAlign: "center",
-            backgroundColor: "#222",
-            color: "#CCC",
-            margin: "5px",
-            padding: "35px",
-            boxShadow: "2px 2px 5px #000",
+        const pecaCompleta = {
+            peca: TORRE,
+            cor: "preta",
+            coluna: "A",
+            linha: 2,
+        }
+        const pecaCompleta2 = {
+            peca: PEAO,
+            cor: "preta",
+            coluna: "A",
+            linha: 3,
         }
 
         return (
             <div style={statusPlayers}>
-                <Player />
-                <div style={whoToPlay}>
-                    Pretas jogam
-                </div>
-                <Player />
+                <Player
+                    color="black"
+                    player="Jogador B"
+                    capturedPieces={[pecaCompleta]} />
+                <NextPlayer />
+                <Player
+                    color="white"
+                    player="Jogador A"
+                    capturedPieces={[pecaCompleta2]} />
             </div>
         );
     }
