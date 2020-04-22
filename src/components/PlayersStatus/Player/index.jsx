@@ -30,8 +30,6 @@ class Player extends Component {
         console.log("capturedPieces");
         console.log(capturedPieces);
 
-        const aa = ['a','b']
-
         return (
             <div style={status}>
                 <div style={{ fontSize: "25px" }}>

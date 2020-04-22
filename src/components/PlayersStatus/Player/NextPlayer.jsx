@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux'
+
 class NextPlayer extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,11 @@ class NextPlayer extends Component {
 
     }
 
-    componentDidUpdate(prevProps) {    }
+    componentDidUpdate(prevProps) {    
+        console.log(prevProps);
+        console.log(this.props);
+
+    }
 
     render() {
 
@@ -29,12 +35,22 @@ class NextPlayer extends Component {
             boxShadow: "2px 2px 5px #000",
         }
 
+        const { currentPlayer } = this.props;
+
+        const brancasJogam = "brancas jogam!";
+        const pretasJogam = "pretas jogam!";
+        
         return (
             <div style={whoToPlay}>
-                Pretas jogam
+                {currentPlayer == "white" ? brancasJogam : pretasJogam}
             </div>
         );
     }
 }
 
-export default NextPlayer
+const mapStateToProps = state => ({
+    currentPlayer: state.turn.currentPlayer
+});
+
+export default connect(mapStateToProps)(NextPlayer);
+

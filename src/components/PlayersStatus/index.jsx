@@ -23,15 +23,13 @@ class PlayersStatus extends Component {
 
         const pecaCompleta = {
             peca: TORRE,
-            cor: "preta",
-            coluna: "A",
-            linha: 2,
+            cor: "branca",
+            linha: 0,
         }
         const pecaCompleta2 = {
             peca: PEAO,
             cor: "preta",
-            coluna: "A",
-            linha: 3,
+            linha: 0,
         }
 
         return (

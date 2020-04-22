@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
       const nextToMove = state.currentPlayer == "white" ? "black" : "white"
       console.log("next to move: " + nextToMove);
       return {
-        currentPlauer: nextToMove
+        currentPlayer: nextToMove
       }
     default:
       return state;
