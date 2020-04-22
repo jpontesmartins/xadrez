@@ -10,7 +10,6 @@ class Player extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             color: this.props.color,
             player: this.props.player,

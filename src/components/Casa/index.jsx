@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-import { moverPeca, limpar } from '../../store/actions';
+import { moverPeca, limpar, nextTurn } from '../../store/actions';
 import { BRANCA, PRETA } from '../constants';
 
 import './styles.css';
@@ -42,9 +42,11 @@ class Casa extends Component {
   }
 
   handleClick() {
-    const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, moverPeca, limpar, aguardandoSegundoClick } = this.props;
+    const { casaOrigem, pecaSelecionada, coluna, linha, corDaPeca, 
+      moverPeca, limpar, aguardandoSegundoClick, nextTurn } = this.props;
     moverPeca(casaOrigem, pecaSelecionada, linha, coluna, corDaPeca);
     limpar();
+    nextTurn();
   }
 
   componentDidUpdate(prevProps) {
@@ -65,9 +67,10 @@ const mapStateToProps = state => ({
   corDaPeca: state.pecas.cor,
   casaOrigem: state.pecas.casaOrigem,
   tabuleiro: state.tabuleiro.tabuleiro,
-  aguardandoSegundoClick: state.pecas.aguardandoSegundoClick
+  aguardandoSegundoClick: state.pecas.aguardandoSegundoClick,
+  turn: state.turn
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca, limpar }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ moverPeca, limpar, nextTurn }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Casa);

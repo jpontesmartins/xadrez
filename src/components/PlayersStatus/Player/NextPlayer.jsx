@@ -31,8 +31,8 @@ class NextPlayer extends Component {
 
         return (
             <div style={whoToPlay}>
-                    Pretas jogam
-                </div>
+                Pretas jogam
+            </div>
         );
     }
 }

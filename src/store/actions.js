@@ -1,3 +1,8 @@
+export const nextTurn = () => ({
+  type: 'NEXT_TURN',
+  payload: {}
+});
+
 export const limpar = () => ({
   type: 'LIMPAR',
   payload: {}
