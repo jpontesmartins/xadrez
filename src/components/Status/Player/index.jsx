@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import builder from "../../../store/reducers/builder";
+import { WHITE, BLACK } from "../../constants";
 
 import { status, cemetery } from "./styles";
 
@@ -19,16 +20,12 @@ class Player extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("Player prevProps");
+        // console.log("Player prevProps");
     }
 
     render() {
-
         const { player, color } = this.state;
         const { capturedPieces } = this.props;
-
-        // console.log("this.props.capturedPieces");
-        // console.log(this.props.capturedPieces);
 
         return (
             <div style={status}>
@@ -42,11 +39,11 @@ class Player extends Component {
                     {capturedPieces.map((piece, i) => {
                         const pecaCompleta = {
                             peca: piece,
-                            cor: color == "white" ? "preta" : "branca",
+                            cor: color == WHITE ? BLACK : WHITE,
                             linha: 0,
                             coluna: ""
                         }
-                        return <div key={i}>{builder.buildPiece2(pecaCompleta)}</div>
+                        return <div key={i}>{builder.buildPiece(pecaCompleta)}</div>
                     })}
                 </div>
             </div>

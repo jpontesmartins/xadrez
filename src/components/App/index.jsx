@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Tabuleiro from '../Tabuleiro';
-import PlayersStatus from '../PlayersStatus';
+import Status from '../Status';
 
 class App extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class App extends Component {
       <Fragment>
         <div style={table}>
           <Tabuleiro />
-          <PlayersStatus />
+          <Status />
         </div>
       </Fragment>
     );

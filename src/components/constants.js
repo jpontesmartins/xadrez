@@ -5,8 +5,8 @@ export const DAMA = { simbolo: "♛", descricao: "Dama" };
 export const REI = { simbolo: "♚", descricao: "Rei" };
 export const PEAO = { simbolo: "♟", descricao: "Peao" };
 
-export const BRANCA = 'branca';
-export const PRETA = 'preta';
+export const WHITE = 'white';
+export const BLACK = 'black';
 
 export const A = "A";
 export const B = "B";

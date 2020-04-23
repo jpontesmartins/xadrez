@@ -11,17 +11,6 @@ const buildPiece = (pecaCompleta) => {
     return <Peca peca={peca} cor={cor} coluna={coluna} linha={linha}> </Peca>;
 }
 
-const buildPiece2 = (pecaCompleta) => {
-    const { peca, cor, coluna, linha } = pecaCompleta;
-    console.log("-----------");
-    console.log("-----------");
-    console.log("-----------");
-    console.log(pecaCompleta);
-    console.log("cor da peca: " + cor);
-
-    return <Peca peca={peca} cor={cor} coluna={coluna} linha={linha}> </Peca>;
-}
-
 const buildSquare = (column, row) => {
     return <Casa coluna={column} linha={parseInt(row)} />;
 }
@@ -63,7 +52,6 @@ const startingPosition = (state) => {
 //ChessSet
 export default {
     buildPiece,
-    buildPiece2,
     buildSquare,
     setupRows,
     setupColumns,

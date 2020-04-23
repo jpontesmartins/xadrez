@@ -32,7 +32,7 @@ class Peca extends Component {
 
   handleClick() {
     //isso aqui ta muito poluido, refatorar agrupando em objetos
-    const { cor, peca, linha, coluna, aguardandoSegundoClick,
+    const { cor, peca, linha, coluna, turn, aguardandoSegundoClick,
       selecionarPeca, capturarPeca, limpar,
       pecas, sendToCemetery, nextTurn } = this.props;
       
@@ -50,7 +50,9 @@ class Peca extends Component {
       limpar();
 
     } else {
-      selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
+      if (turn.currentPlayer == cor) {
+        selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
+      }
     }
     // console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
@@ -72,6 +74,7 @@ class Peca extends Component {
 }
 
 const mapStateToProps = state => ({
+  turn: state.turn,
   pecas: state.pecas,
   aguardandoSegundoClick: state.pecas.aguardandoSegundoClick
 });

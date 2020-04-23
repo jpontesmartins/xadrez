@@ -1,3 +1,5 @@
+import { WHITE, BLACK } from "../../components/constants";
+
 const INITIAL_STATE = {
   currentPlayer: "white",
   whiteCemetery: [],
@@ -7,8 +9,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'NEXT_TURN':
-      const nextToMove = state.currentPlayer == "white" ? "black" : "white"
-      // console.log("next to move: " + nextToMove);
+      const nextToMove = state.currentPlayer == WHITE ? BLACK : WHITE
       return {
         ...state,
         currentPlayer: nextToMove
@@ -19,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
       let white = state.whiteCemetery;
       let black = state.blackCemetery;
 
-      if (action.payload.cor == "branca") {
+      if (action.payload.cor == WHITE) {
         white = state.whiteCemetery;
         white.push(peca);
       } else {

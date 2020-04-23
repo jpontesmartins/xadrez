@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 
 import Player from "./Player"
 import NextPlayer from './Player/NextPlayer';
+import { BLACK, WHITE } from '../constants';
 
-class PlayersStatus extends Component {
+class Status extends Component {
     constructor(props) {
         super(props);
-        this.state = { }
     }
 
     componentDidMount() { }
 
-    componentDidUpdate(prevProps) {
-        console.log("PlayersStatus");
-        console.log(this.props);
-    }
+    componentDidUpdate(prevProps) { }
 
     render() {
 
@@ -26,21 +22,12 @@ class PlayersStatus extends Component {
         }
 
         const { whiteCemetery, blackCemetery } = this.props.turn;
-        console.log("blackCemetery");
-        console.log(blackCemetery);
 
         return (
             <div style={statusPlayers}>
-                <Player
-                    color="black"
-                    player="Jogador B"
-                    capturedPieces={whiteCemetery}/>
+                <Player color={BLACK} player="Jogador B" capturedPieces={whiteCemetery} />
                 <NextPlayer />
-                <Player
-                    color="white"
-                    player="Jogador A"
-                    capturedPieces={blackCemetery}/>
-                    
+                <Player color={WHITE} player="Jogador A" capturedPieces={blackCemetery} />
             </div>
         );
     }
@@ -50,4 +37,4 @@ const mapStateToProps = state => ({
     turn: state.turn
 });
 
-export default connect(mapStateToProps)(PlayersStatus);
+export default connect(mapStateToProps)(Status);

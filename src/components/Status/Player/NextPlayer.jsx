@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
+import { WHITE, BLACK } from '../../constants';
 
 class NextPlayer extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class NextPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("NextPlayer prevProps");
+        // console.log("NextPlayer prevProps");
      }
 
     render() {
@@ -35,12 +36,12 @@ class NextPlayer extends Component {
 
         const { currentPlayer } = this.props;
 
-        const brancasJogam = "brancas jogam!";
-        const pretasJogam = "pretas jogam!";
+        const whitesTurn = "white's turn!";
+        const blacksTurn = "black's turn!";
         
         return (
             <div style={whoToPlay}>
-                {currentPlayer == "white" ? brancasJogam : pretasJogam}
+                {currentPlayer == WHITE ? whitesTurn : blacksTurn}
             </div>
         );
     }

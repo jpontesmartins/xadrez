@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
 import { moverPeca, limpar, nextTurn } from '../../store/actions';
-import { BRANCA, PRETA } from '../constants';
+import { WHITE, BLACK } from '../constants';
 
 import './styles.css';
 
@@ -30,13 +30,13 @@ class Casa extends Component {
   }
 
   componentDidMount() {
-    if (this.props.cor == BRANCA) {
+    if (this.props.cor == WHITE) {
       this.setState({
-        cor: BRANCA
+        cor: WHITE
       })
     } else {
       this.setState({
-        cor: PRETA
+        cor: BLACK
       })
     }
   }
