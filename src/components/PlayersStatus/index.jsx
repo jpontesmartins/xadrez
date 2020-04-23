@@ -14,7 +14,7 @@ class PlayersStatus extends Component {
     componentDidMount() { }
 
     componentDidUpdate(prevProps) {
-        // console.log("PlayersStatus prevProps");
+        console.log("PlayersStatus");
         console.log(this.props);
     }
 
@@ -26,6 +26,8 @@ class PlayersStatus extends Component {
         }
 
         const { whiteCemetery, blackCemetery } = this.props.turn;
+        console.log("blackCemetery");
+        console.log(blackCemetery);
 
         return (
             <div style={statusPlayers}>

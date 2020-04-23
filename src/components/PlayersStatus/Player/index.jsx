@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { connect } from 'react-redux';
 import builder from "../../../store/reducers/builder";
 
 import { status, cemetery } from "./styles";
@@ -26,10 +25,10 @@ class Player extends Component {
     render() {
 
         const { player, color } = this.state;
-        const { whiteCemetery } = this.props.turn;
+        const { capturedPieces } = this.props;
 
-        console.log("Player whiteCemetery");
-        console.log(whiteCemetery[0]);
+        console.log("this.props.capturedPieces");
+        console.log(this.props.capturedPieces);
 
         return (
             <div style={status}>
@@ -40,7 +39,9 @@ class Player extends Component {
                     {player}
                 </div>
                 <div style={cemetery}>
-                    {whiteCemetery.map((piece, i) => {
+                    {capturedPieces.map((piece, i) => {
+                        //ver como eh o objeto "piece" e como ele eh tratado em "buildPiece"
+                        console.log(piece);
                         return <div key={i}>{builder.buildPiece(piece)}</div>
                     })}
                 </div>
@@ -49,8 +50,4 @@ class Player extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    turn: state.turn
-});
-
-export default connect(mapStateToProps)(Player);
+export default Player;
