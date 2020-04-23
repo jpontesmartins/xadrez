@@ -1,5 +1,10 @@
 const INITIAL_STATE = {
-  pecaSelecionada: {}
+  pecaSelecionada: {},
+  linha: 0,
+  coluna: "",
+  cor: "",
+  casaOrigem: "",
+  aguardandoSegundoClick: false
 };
 
 export default (state = INITIAL_STATE, action) => {

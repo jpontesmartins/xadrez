@@ -1,3 +1,15 @@
+export const sendToCemetery = (peca, cor) => ({
+  type: 'SEND_TO_CEMETERY',
+  payload: {
+    peca, cor
+  }
+});
+
+export const nextTurn = () => ({
+  type: 'NEXT_TURN',
+  payload: {}
+});
+
 export const limpar = () => ({
   type: 'LIMPAR',
   payload: {}

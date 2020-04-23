@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { selecionarPeca, capturarPeca } from '../../store/actions';
+import { selecionarPeca, capturarPeca, limpar, sendToCemetery, nextTurn } from '../../store/actions';
 import PecaComponent from './PecaComponent';
 
 import '../Tabuleiro/styles.css';
@@ -24,24 +24,37 @@ class Peca extends Component {
   }
 
   pieceIsSelected() {
-    return this.props.linha === this.props.pecaSelecionada.linha &&
-      this.props.coluna === this.props.pecaSelecionada.coluna;
+    return this.props.linha === this.props.pecas.linha &&
+      this.props.coluna === this.props.pecas.coluna;
   }
 
   componentDidUpdate(prevProps) { }
 
   handleClick() {
-    const { cor, peca, linha, coluna, aguardandoSegundoClick,
-      pecaDeAtaque, selecionarPeca, capturarPeca, pecaSelecionada } = this.props;
+    //isso aqui ta muito poluido, refatorar agrupando em objetos
+    const { cor, peca, linha, coluna, turn, aguardandoSegundoClick,
+      selecionarPeca, capturarPeca, limpar,
+      pecas, sendToCemetery, nextTurn } = this.props;
+      
+
+    const pecaDeAtaque = {
+      peca: pecas.pecaSelecionada,
+      cor: pecas.cor
+    }
 
     if (aguardandoSegundoClick && pecaDeAtaque.cor !== cor) {
-      const pecaOrigemAtaque = pecaSelecionada;
+      const pecaOrigemAtaque = pecas;
       capturarPeca(this.getCasa(), peca, linha, coluna, cor, pecaDeAtaque, pecaOrigemAtaque);
-    } else {
-      selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
+      sendToCemetery(peca, cor);
+      nextTurn();
+      limpar();
 
+    } else {
+      if (turn.currentPlayer == cor) {
+        selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
+      }
     }
-    console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
+    // console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
 
   render() {
@@ -61,14 +74,11 @@ class Peca extends Component {
 }
 
 const mapStateToProps = state => ({
-  pecaDeAtaque:  {
-    peca: state.pecas.pecaSelecionada,
-    cor: state.pecas.cor
-  },
-  pecaSelecionada: state.pecas,
+  turn: state.turn,
+  pecas: state.pecas,
   aguardandoSegundoClick: state.pecas.aguardandoSegundoClick
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca, capturarPeca }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ selecionarPeca, capturarPeca, limpar, sendToCemetery, nextTurn }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peca);

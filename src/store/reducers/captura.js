@@ -77,8 +77,8 @@ const captureAtSameColumn = (origem, colunaCompleta, destino) => {
 
     let linhas = new Map();
     colunaCompleta.map((linhaProps, i) => {
-        console.log("linhaProps");
-        console.log(linhaProps.props);
+        // console.log("linhaProps");
+        // console.log(linhaProps.props);
         const pecaCompleta = linhaProps.props;
 
         if (linhaProps.props.peca) {

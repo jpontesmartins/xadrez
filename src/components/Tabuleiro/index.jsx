@@ -30,8 +30,6 @@ class Tabuleiro extends Component {
 
     return (
 
-      <div> xadrez da ovelha estoica :)
-        <div onClick={montarTabuleiro}>[organizar tabuleiro]</div>
         <div className="container">
 
           <Coluna tipoDeColuna={white} nome="A" pecas={colunaA} />
@@ -42,8 +40,6 @@ class Tabuleiro extends Component {
           <Coluna tipoDeColuna={black} nome="F" pecas={colunaF} />
           <Coluna tipoDeColuna={white} nome="G" pecas={colunaG} />
           <Coluna tipoDeColuna={black} nome="H" pecas={colunaH} />
-
-        </div>
 
       </div>
     );
