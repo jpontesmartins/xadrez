@@ -27,8 +27,8 @@ class Player extends Component {
         const { player, color } = this.state;
         const { capturedPieces } = this.props;
 
-        console.log("this.props.capturedPieces");
-        console.log(this.props.capturedPieces);
+        // console.log("this.props.capturedPieces");
+        // console.log(this.props.capturedPieces);
 
         return (
             <div style={status}>
@@ -40,9 +40,13 @@ class Player extends Component {
                 </div>
                 <div style={cemetery}>
                     {capturedPieces.map((piece, i) => {
-                        //ver como eh o objeto "piece" e como ele eh tratado em "buildPiece"
-                        console.log(piece);
-                        return <div key={i}>{builder.buildPiece(piece)}</div>
+                        const pecaCompleta = {
+                            peca: piece,
+                            cor: color == "white" ? "preta" : "branca",
+                            linha: 0,
+                            coluna: ""
+                        }
+                        return <div key={i}>{builder.buildPiece2(pecaCompleta)}</div>
                     })}
                 </div>
             </div>

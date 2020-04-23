@@ -52,7 +52,7 @@ class Peca extends Component {
     } else {
       selecionarPeca(this.getCasa(), peca, linha, coluna, cor, true);
     }
-    console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
+    // console.log(`${peca.descricao} da cor ${cor} na casa ${this.getCasa()}`);
   }
 
   render() {
