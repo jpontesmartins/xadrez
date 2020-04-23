@@ -17,11 +17,9 @@ class NextPlayer extends Component {
 
     }
 
-    componentDidUpdate(prevProps) {    
-        console.log(prevProps);
-        console.log(this.props);
-
-    }
+    componentDidUpdate(prevProps) {
+        console.log("NextPlayer prevProps");
+     }
 
     render() {
 

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 
-import { TORRE, PEAO } from "../constants";
+import { connect } from 'react-redux';
+
 import Player from "./Player"
 import NextPlayer from './Player/NextPlayer';
-
 
 class PlayersStatus extends Component {
     constructor(props) {
         super(props);
+        this.state = { }
     }
 
     componentDidMount() { }
 
-    componentDidUpdate(prevProps) { }
+    componentDidUpdate(prevProps) {
+        // console.log("PlayersStatus prevProps");
+        console.log(this.props);
+    }
 
     render() {
 
@@ -21,31 +25,27 @@ class PlayersStatus extends Component {
             gridTemplateRows: "4fr 3fr 4fr",
         }
 
-        const pecaCompleta = {
-            peca: TORRE,
-            cor: "branca",
-            linha: 0,
-        }
-        const pecaCompleta2 = {
-            peca: PEAO,
-            cor: "preta",
-            linha: 0,
-        }
+        const { whiteCemetery, blackCemetery } = this.props.turn;
 
         return (
             <div style={statusPlayers}>
                 <Player
                     color="black"
                     player="Jogador B"
-                    capturedPieces={[pecaCompleta]} />
+                    capturedPieces={whiteCemetery}/>
                 <NextPlayer />
                 <Player
                     color="white"
                     player="Jogador A"
-                    capturedPieces={[pecaCompleta2]} />
+                    capturedPieces={blackCemetery}/>
+                    
             </div>
         );
     }
 }
 
-export default PlayersStatus
+const mapStateToProps = state => ({
+    turn: state.turn
+});
+
+export default connect(mapStateToProps)(PlayersStatus);

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { TORRE, PEAO } from "../../constants";
+import { connect } from 'react-redux';
 import builder from "../../../store/reducers/builder";
 
 import { status, cemetery } from "./styles";
-import Peca from '../../Peca';
 
 class Player extends Component {
     constructor(props) {
@@ -18,17 +17,19 @@ class Player extends Component {
     }
 
     componentDidMount() {
-
     }
 
-    componentDidUpdate(prevProps) {    }
+    componentDidUpdate(prevProps) {
+        console.log("Player prevProps");
+    }
 
     render() {
 
-        const { player, color, capturedPieces } = this.state;
+        const { player, color } = this.state;
+        const { whiteCemetery } = this.props.turn;
 
-        console.log("capturedPieces");
-        console.log(capturedPieces);
+        console.log("Player whiteCemetery");
+        console.log(whiteCemetery[0]);
 
         return (
             <div style={status}>
@@ -39,13 +40,17 @@ class Player extends Component {
                     {player}
                 </div>
                 <div style={cemetery}>
-                   {capturedPieces.map((piece, i) => {
-                       return <div key={i}>{builder.buildPiece(piece)}</div>
-                   })}
+                    {whiteCemetery.map((piece, i) => {
+                        return <div key={i}>{builder.buildPiece(piece)}</div>
+                    })}
                 </div>
             </div>
         );
     }
 }
 
-export default Player
+const mapStateToProps = state => ({
+    turn: state.turn
+});
+
+export default connect(mapStateToProps)(Player);
